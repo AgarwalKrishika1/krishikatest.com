@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,8 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return "HELLOOO ";
 });
 
 Route::get('/product', [ProductController::class, 'index'])->name('products.index');
@@ -23,3 +25,8 @@ Route::post('/product', [ProductController::class, 'store'])->name('products.sto
 Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/product/{product}/update', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
+
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');

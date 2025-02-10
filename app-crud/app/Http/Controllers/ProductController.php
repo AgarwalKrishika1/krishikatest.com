@@ -36,9 +36,10 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, Product $product){
+        //bail to stop at first error
         $data = $request->validate([
             'name'=> 'required',
-            'quantity'=> 'required|numeric',
+            'quantity'=> 'bail|required|numeric',
             'price'=> 'required|numeric',
             'description' => 'nullable',
         ]);

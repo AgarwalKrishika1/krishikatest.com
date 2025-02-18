@@ -45,7 +45,7 @@
             </form>
         @endforeach
     </ul>
-
+  
     <h3>Total: ${{ array_sum(array_map(function($item) {
         return $item['price'] * $item['quantity'];
     }, $cart)) }}

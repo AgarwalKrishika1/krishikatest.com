@@ -29,7 +29,7 @@
     <div>{{ session('error') }}</div>
 @endif
 
-@if(session()->has('cart') && count(session('cart')) > 0)
+@if(session()->has('cart') && count(session('cart')) >= 1)
     <ul>
         @foreach($cart as $id => $item)
             <li>
@@ -37,12 +37,12 @@
                 - ${{ $item['price'] }} 
                 x {{ $item['quantity'] }}
                 <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" style="width:50px;height:50px;">
-                <form action="{{ route('cart.remove', ['id' => $id]) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Remove</button>
-                </form>
             </li>
+            <form action="{{ route('cart.remove', ['id' => $id]) }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Remove</button>
+            </form>
         @endforeach
     </ul>
 
@@ -51,10 +51,10 @@
     }, $cart)) }}
     </h3>
 
-<form action="{{ route('order.checkout') }}" method="POST">
-    @csrf
-    <button type="submit" class="btn btn-primary">Checkout</button>
-</form>
+    <form action="{{ route('order.checkout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-primary">Checkout</button>
+    </form>
 
     <!-- Optionally, add checkout functionality here -->
 @else

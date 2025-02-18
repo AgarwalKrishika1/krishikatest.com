@@ -1,4 +1,4 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 @extends('adminlte::page')
 @section('content')
 <h2>Your Cart</h2>
@@ -12,4 +12,4 @@
 @endforeach
 
 <a href="{{ route('order.checkout') }}">Proceed to Checkout</a>
-@endsection --}}
+@endsection

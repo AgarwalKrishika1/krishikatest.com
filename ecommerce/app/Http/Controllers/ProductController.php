@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
 
 class ProductController extends Controller
 {
@@ -76,42 +77,45 @@ public function create()
 
     // Add product to cart
     public function addToCart($id)
-    {
-        
-        $product = Products::find($id);
-        
-        if (!$product) {
-            return redirect()->route('products.index')->with('error', 'Product not found!');
-        }
+{
+    $product = Products::find($id);
 
-        $cart = session()->get('cart', []);
-        
-
-        // Check if product already exists in the cart
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                'name' => $product->name,
-                'price' => $product->price,
-                'quantity' => 1,
-                'image' => $product->image
-            ];
-        }
-
-        // Save cart to session
-        session()->put('cart', $cart);
-        // echo "<pre>";
-        // print_r($cart);exit;
-
-        return view('cart.index', compact('cart'));
+    if (!$product) {
+        return redirect()->route('products.index')->with('error', 'Product not found!');
     }
 
+    // Retrieve the cart from the cookie
+    $cart = json_decode(Cookie::get('cart', '[]'), true); // Get cart, default to empty array if not set
+    
+    // Check if the product already exists in the cart
+    // if (isset($cart[$id])) {
+    //     $cart[$id]['quantity']++; // Increase quantity if product is already in the cart
+    // } else {
+    //     $cart[$id] = [
+    //         'name' => $product->name,
+    //         'price' => $product->price,
+    //         'quantity' => 1,
+    //         'image' => $product->image
+    //     ];
+    // }
+    $cart[] = [
+        'name' => $product->name,
+        'price' => $product->price,
+        'quantity' => 1,
+        'image' => $product->image
+    ];
+    // dd($cart);
+     Cookie::queue(Cookie::forget('$cart'));
+    Cookie::queue('cart', json_encode($cart), 1 * 1); // Store for 60min
+   
+    return view('cart.index', compact('cart'));
+}
     // View the cart
     public function viewCart()
-    {
-        $cart = session()->get('cart', []);
-        return view('cart.index', compact('cart'));
-    }
+{
+    // Retrieve the cart from the cookie
+    $cart = json_decode(Cookie::get('cart', '[]'), true); // Get cart, default to empty array if not set
 
+    return view('cart.index', compact('cart'));
+}
 }

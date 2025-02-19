@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Products</h1>
+    <h1>Cart</h1>
 @stop
 
 @section('content')
@@ -28,35 +28,35 @@
 @if(session('error'))
     <div>{{ session('error') }}</div>
 @endif
-
-@if(session()->has('cart') && count(session('cart')) >= 1)
+@if(count($cart) >= 1)
     <ul>
-        @foreach($cart as $id => $item)
+        @foreach($cart as $index => $item)
             <li>
                 <strong>{{ $item['name'] }}</strong> 
                 - ${{ $item['price'] }} 
                 x {{ $item['quantity'] }}
                 <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" style="width:50px;height:50px;">
             </li>
-            <form action="{{ route('cart.remove', ['id' => $id]) }}" method="POST" style="display:inline;">
+            <form action="{{ route('cart.remove', ['index' => $index]) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Remove</button>
             </form>
         @endforeach
     </ul>
-  
+    <h3>Cart Cookie Data:</h3>
+<pre>
+    {{ print_r($cart, true) }}
+</pre>
     <h3>Total: ${{ array_sum(array_map(function($item) {
         return $item['price'] * $item['quantity'];
-    }, $cart)) }}
-    </h3>
+    }, $cart)) }}</h3>
 
     <form action="{{ route('order.checkout') }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-primary">Checkout</button>
     </form>
 
-    <!-- Optionally, add checkout functionality here -->
 @else
     <p>Your cart is empty.</p>
 @endif

@@ -21,14 +21,8 @@
 <body>
 <h2>Your Cart</h2>
 
-@if(session('success'))
-    <div>{{ session('success') }}</div>
-@endif
-
-@if(session('error'))
-    <div>{{ session('error') }}</div>
-@endif
 @if(count($cart) >= 1)
+
     <ul>
         @foreach($cart as $index => $item)
             <li>
@@ -44,18 +38,21 @@
             </form>
         @endforeach
     </ul>
-    <h3>Cart Cookie Data:</h3>
+    {{-- <h3>Cart Cookie Data:</h3>
 <pre>
     {{ print_r($cart, true) }}
-</pre>
+</pre> --}}
     <h3>Total: ${{ array_sum(array_map(function($item) {
         return $item['price'] * $item['quantity'];
     }, $cart)) }}</h3>
-
+ <a href="/products" class="btn btn-primary">Back</a><br>
     <form action="{{ route('order.checkout') }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-primary">Checkout</button>
     </form>
+    <br>
+   
+    
 
 @else
     <p>Your cart is empty.</p>

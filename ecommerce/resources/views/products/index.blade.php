@@ -45,7 +45,7 @@
                                 <h3 class="product-name">${product.name}</h3>
                                 <p class="product-description">${product.description}</p>
                                 <p class="product-price">$${product.price}</p>
-                                 <a href="/add-to-cart/${product.id}" class="add-to-cart-btn">Add to Cart</a>
+                                <a href="/add-to-cart/${product.id}" class="add-to-cart-btn">Add to Cart</a>
                                  
                             </div>
                             

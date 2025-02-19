@@ -15,11 +15,25 @@
     </div>
     <div class="card-body text-center">
         <form action="{{ route('razorpay.payment.store') }}" method="POST" >
+
+            <?php
+            session_start();
+            
+            // Access the saved total
+            if (isset($_SESSION['total_amount'])) {
+                $cartTotalForPayment = $_SESSION['total_amount'];
+                // Use this value for the payment process
+                echo "Your total for payment is: " . $cartTotalForPayment;
+            } else {
+                echo "Total not found. Please try again.";
+            }
+            ?>
+            
             @csrf 
             <script src="https://checkout.razorpay.com/v1/checkout.js"
                     data-key="{{ env('RAZORPAY_KEY') }}"
-                    data-amount="$total_amount"
-                    data-buttontext="{{$total_amount}}"
+                    data-amount="$cartTotalForPayment"
+                    data-buttontext="{{ $cartTotalForPayment}}"
                     data-name="GeekyAnts official"
                     data-description="Razorpay payment"
                     data-image="/images/logo-icon.png"

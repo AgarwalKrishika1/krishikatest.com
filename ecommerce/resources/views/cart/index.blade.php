@@ -38,22 +38,33 @@
             </form>
         @endforeach
     </ul>
-    {{-- <h3>Cart Cookie Data:</h3>
-<pre>
-    {{ print_r($cart, true) }}
-</pre> --}}
-    <h3>Total: ${{ array_sum(array_map(function($item) {
+
+    {{-- <h3>Total: {{ array_sum(array_map(function($item) {
         return $item['price'] * $item['quantity'];
-    }, $cart)) }}</h3>
- <a href="/products" class="btn btn-primary">Back</a><br>
+    }, $cart)) }}</h3> --}}
+
+    <?php
+        // Assuming this is the total calculation block
+        $total = array_sum(array_map(function($item) {
+            return $item['price'] * $item['quantity'];
+        }, $cart));
+
+        // Store the total in a session variable
+        session_start();
+        $_SESSION['total_amount'] = $total;
+        ?>
+        <h3>Total: $<?php echo $total; ?></h3>
+
+        
+    <br>
+    <a href="/products" class="btn btn-primary">Back</a>
+    <br><br>
     <form action="{{ route('order.checkout') }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-primary">Checkout</button>
     </form>
     <br>
    
-    
-
 @else
     <p>Your cart is empty.</p>
 @endif

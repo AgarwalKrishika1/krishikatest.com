@@ -56,13 +56,21 @@ Route::middleware('auth')->group(function () {
     // Route::get('checkout', [OrderController::class, 'checkout'])->name('order.checkout');
     Route::post('checkout', [OrderController::class, 'checkout'])->name('order.checkout');
     
-   // Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show');
+   Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show');
     // Route::post('payment/{orderId}', [PaymentController::class, 'processPayment'])->name('payment.process');
 
     // Route::get('product',[PaymentController::class,'index']);
  //   Route::post('razorpay-payment',[PaymentController::class,'store'])->name('razorpay.payment.store');
 
- Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('payment.show');
+
+//  Route::get('payment',[RazorpayPaymentController::class,'index'])->name('payment.show');
+// Route::post('payment/create',[RazorpayPaymentController::class,'store'])->name('razorpay.payment.store');
+// Route::post('payment/failure',[RazorpayPaymentController::class,'failure'])->name('razorpay.payment.failure');
+// Route::get('/402', function () {
+//     return view('errors.402');
+// });
+
+//  Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('payment.show');
 
 Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
 });

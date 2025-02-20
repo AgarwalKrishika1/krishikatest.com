@@ -68,6 +68,7 @@
 @else
     <p>Your cart is empty.</p>
 @endif
+
 </body>
 </html>
 

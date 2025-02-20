@@ -108,13 +108,18 @@ public function create()
     // dd($cart);
     Cookie::queue(Cookie::forget('$cart'));
     Cookie::queue('cart', json_encode($cart), 60); // Store for 60min
-
     return redirect()->route('products.addToCartView') ;
 
 }
 
 public function addToCartView(Request $request){
+    
     $cart = json_decode(Cookie::get('cart', '[]'), true);
+    // echo"<pre>";
+    // print_r($_COOKIE);exit;
     return view('cart.index', compact('cart'));
+
+
+  
 }
 }

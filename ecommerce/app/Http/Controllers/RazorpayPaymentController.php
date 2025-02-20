@@ -12,6 +12,7 @@ use Razorpay\Api\Api;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
   
@@ -85,12 +86,9 @@ class RazorpayPaymentController extends Controller
 
         }
 
-          
-
         Session::put('success', 'Payment successful');
-       
-
-        return redirect()->route('products.index');
+    
+        return redirect('/products')->with(setcookie('cart','',time()-3600));
 
     }
 

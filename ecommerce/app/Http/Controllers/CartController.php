@@ -78,7 +78,7 @@ public function remove($index)
         // If the cart is empty after removal, clear the cookie
         if (empty($cart)) {
             // Forget the cart cookie
-            Cookie::queue(Cookie::forget('cart'));
+            $cart = [];
             return redirect('/products')->with('success', 'Cart is now empty');
         } else {
             

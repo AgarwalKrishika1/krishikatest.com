@@ -18,6 +18,7 @@ class OrderController extends Controller
             return $item['price'] * $item['quantity'];
         }, $cartItems));
         //dd($total);
+
         
         // Create Order
         $order = Order::create([

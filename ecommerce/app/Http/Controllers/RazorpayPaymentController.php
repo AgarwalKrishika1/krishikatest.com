@@ -56,7 +56,7 @@ class RazorpayPaymentController extends Controller
 
         $input = $request->all();
 
-  
+       
 
         $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
 
@@ -64,7 +64,6 @@ class RazorpayPaymentController extends Controller
 
         $payment = $api->payment->fetch($input['razorpay_payment_id']);
 
-  
 
         if(count($input)  && !empty($input['razorpay_payment_id'])) {
 
@@ -89,8 +88,9 @@ class RazorpayPaymentController extends Controller
           
 
         Session::put('success', 'Payment successful');
+       
 
-        return redirect()->back();
+        return redirect()->route('products.index');
 
     }
 

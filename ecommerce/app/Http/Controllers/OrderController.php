@@ -3,22 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-use App\Models\shipping;
 use App\Models\order;
+use App\Models\shipping;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class OrderController extends Controller
 {
     public function checkout(Request $request)
     {
-        $cartItems = Cart::where('user_id', auth()->id())->get();
-        //$total = $cartItems->sum(fn($item) => $item->product->price * $item->quantity);
+        //$cartItems = Cart::where('user_id', auth()->id())->get();
+        $cartItems = json_decode(Cookie::get('cart', '[]'), true);
+        $total = array_sum(array_map(function($item) {
+            return $item['price'] * $item['quantity'];
+        }, $cartItems));
+        //dd($total);
         
         // Create Order
         $order = Order::create([
             'user_id' => auth()->id(),
             'status' => 'Pending',
-            //'total_price' => $total
+            'total_price' => $total
         ]);
 
       // Redirect to shipping form to collect address details

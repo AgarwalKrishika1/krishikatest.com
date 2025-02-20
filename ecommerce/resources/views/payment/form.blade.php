@@ -21,9 +21,10 @@
             
             // Access the saved total
             if (isset($_SESSION['total_amount'])) {
-                $cartTotalForPayment = $_SESSION['total_amount'];
+                $cartTotalForPayment = $_SESSION['total_amount']*100;
+                session(['cart_total' => $cartTotalForPayment]);
                 // Use this value for the payment process
-                echo "Your total for payment is: " . $cartTotalForPayment;
+                //echo "Your total for payment is: " . $cartTotalForPayment;
             } else {
                 echo "Total not found. Please try again.";
             }
@@ -32,8 +33,10 @@
             @csrf 
             <script src="https://checkout.razorpay.com/v1/checkout.js"
                     data-key="{{ env('RAZORPAY_KEY') }}"
-                    data-amount="$cartTotalForPayment"
-                    data-buttontext="{{ $cartTotalForPayment}}"
+                    {{-- data-amount="$cartTotalForPayment" --}}
+                    data-amount="{{ session('cart_total') }}"
+                    {{-- data-buttontext="{{ $cartTotalForPayment}}" --}}
+                     data-buttontext="pay {{ session('cart_total')/100 }}"
                     data-name="GeekyAnts official"
                     data-description="Razorpay payment"
                     data-image="/images/logo-icon.png"

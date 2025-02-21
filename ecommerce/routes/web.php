@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
@@ -23,6 +24,8 @@ use App\Http\Controllers\RazorpayPaymentController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/aa', [TemplateController::class,'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

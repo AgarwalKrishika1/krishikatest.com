@@ -1,5 +1,6 @@
 <!-- shipping.blade.php -->
 @extends('layouts.app')
+
 @extends('adminlte::page')
 
 

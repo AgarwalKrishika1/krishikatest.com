@@ -1,3 +1,4 @@
+
 @include('adminlte::page')
 <!DOCTYPE html>
 <html>

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @extends('adminlte::page')
 @section('content')
 <h2>Your Cart</h2>

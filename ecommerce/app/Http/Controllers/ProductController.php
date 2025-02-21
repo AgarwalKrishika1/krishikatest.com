@@ -22,28 +22,6 @@ public function show(Products $product)
     return view('products.show', compact('product'));
 }
 
-public function create()
-    {
-       
-       return view('products.create');
-    }
-
-    public function store(Request $request)
-    {
-       $request->validate([
-        'name'=> 'required',
-       ]);
-
-       $task = new Products();
-       $task->name = $request->name;
-       $task->price = $request->price;
-       $task->description = $request->description;
-       $task->image = $request->image;
-
-       $task->save();
-
-       return redirect()->route('index');
-    }
 
     public function fetchAndSaveProducts()
     {
@@ -58,7 +36,7 @@ public function create()
 
         // Parse the JSON response
         $products = json_decode($response->getBody(), true);
-
+        // dd($products);
         // Iterate through the products and save to the database
         foreach ($products as $productData) {
             // Assuming you have a Product model with `name`, `price`, `description`, etc.
@@ -66,6 +44,7 @@ public function create()
                 'name' => $productData['title'],
                 'price' => $productData['price'],
                 'description' => $productData['description'],
+                'category' => $productData['category'],
                 'image' => $productData['image'],
             ]);
         }
@@ -118,7 +97,7 @@ public function addToCartView(Request $request){
     // echo"<pre>";
     // print_r($_COOKIE);exit;
     return view('cart.index', compact('cart'));
-
+  
 
   
 }

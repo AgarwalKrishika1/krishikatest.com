@@ -45,6 +45,7 @@
                                 <img src="${product.image}" alt="${product.name}" class="product-img" style="height:100px; width:100px;">
                                 <h3 class="product-name">${product.name}</h3>
                                 <p class="text-wrap">${product.description}</p>
+                                <p>${product.category}</p>
                                 <p class="product-price">Rs ${product.price}</p>
                                 <a href="/add-to-cart/${product.id}" class="add-to-cart-btn">Add to Cart</a>
                                  

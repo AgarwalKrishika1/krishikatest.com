@@ -19,6 +19,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('public/frontend/css/custom.css') }}">
     
 </head>
+
 <body>
 
 <div class="products-container">
@@ -43,8 +44,8 @@
                             <div class="product-card">
                                 <img src="${product.image}" alt="${product.name}" class="product-img" style="height:100px; width:100px;">
                                 <h3 class="product-name">${product.name}</h3>
-                                <p class="product-description">${product.description}</p>
-                                <p class="product-price">$${product.price}</p>
+                                <p class="text-wrap">${product.description}</p>
+                                <p class="product-price">Rs ${product.price}</p>
                                 <a href="/add-to-cart/${product.id}" class="add-to-cart-btn">Add to Cart</a>
                                  
                             </div>

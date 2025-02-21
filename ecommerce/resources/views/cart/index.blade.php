@@ -27,7 +27,7 @@
         @foreach($cart as $index => $item)
             <li>
                 <strong>{{ $item['name'] }}</strong> 
-                - ${{ $item['price'] }} 
+                - Rs {{ $item['price'] }} 
                 x {{ $item['quantity'] }}
                 <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" style="width:50px;height:50px;">
             </li>
@@ -53,7 +53,7 @@
         session_start();
         $_SESSION['total_amount'] = $total;
         ?>
-        <h3>Total: $<?php echo $total; ?></h3>
+        <h3>Total: Rs <?php echo $total; ?></h3>
 
         
     <br>

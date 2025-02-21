@@ -42,8 +42,13 @@ Route::group(['middleware' => ['auth','admin']], function () {
 
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/information', function () {
+        return "This is trial website using php laravel";
+    });
+
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show'); //not working
+   // Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show'); //not working
     Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('products.addToCart');
     Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->name('products.addToCartView');
     Route::delete('/add-to-cart/{index}', [CartController::class, 'remove'])->name('cart.remove');

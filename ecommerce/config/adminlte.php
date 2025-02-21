@@ -330,14 +330,14 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url' => 'admin/settings',
+            'url' => '/home',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+        // [
+        //     'text' => 'change_password',
+        //     'url' => 'password/reset',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
         // [
         //     'text' => 'multilevel',
         //     'icon' => 'fas fa-fw fa-share',
@@ -376,21 +376,21 @@ return [
         //         ],
         //     ],
         // ],
-        ['header' => 'labels'],
+        ['header' => ''],
         [
-            'text' => 'important',
+            'text' => 'products',
             'icon_color' => 'red',
-            'url' => '#',
+            'url' => '/products',
         ],
         [
-            'text' => 'warning',
+            'text' => 'cart',
             'icon_color' => 'yellow',
-            'url' => '#',
+            'url' => 'add-to-cart-view',
         ],
         [
             'text' => 'information',
             'icon_color' => 'cyan',
-            'url' => '#',
+            'url' => '/information',
         ],
     ],
 

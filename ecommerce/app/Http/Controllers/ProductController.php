@@ -14,16 +14,16 @@ class ProductController extends Controller
     public function index()
 {
     $products = Products::all();
-    return view('products.index', compact('products'));
-}
-
-public function showProducts()
-{
-    // Fetch all saved products from the database
-    $products = Products::all();
-
     return view('products.product', compact('products'));
 }
+
+// public function showProducts()
+// {
+//     // Fetch all saved products from the database
+//     $products = Products::all();
+
+//     return view('products.product', compact('products'));
+// }
 
 public function fetchAndSaveProducts()
 {

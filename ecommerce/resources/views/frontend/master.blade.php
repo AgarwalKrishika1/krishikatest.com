@@ -40,10 +40,10 @@
       @include('frontend.arrival');
       <!-- end arrival section -->
       
-      <!-- product section -->
-     @include('frontend.product');
+      {{-- <!-- product section -->
+     @extends('frontend.product');
      
-      <!-- end product section -->
+      <!-- end product section --> --}}
 
       <!-- subscribe section -->
      @include('frontend.subscribe');

@@ -25,6 +25,23 @@ Route::get('/', function () {
     return view('frontend.master');
 });
 
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/testimonial', function () {
+    return view('testimonial');
+});
+
+Route::get('/blog_list', function () {
+    return view('blog_list');
+});
+
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
 Route::get('/a', [TemplateController::class,'index'])->name('templateHome');
 
 Route::get('/dashboard', function () {
@@ -64,7 +81,7 @@ Route::middleware('auth')->group(function () {
         return "This is trial website using php laravel";
     });
 
-    Route::get('/products', [ProductController::class, 'showProducts'])->name('products.index');
+    Route::get('/products', [ProductController::class, 'index']);
    
     Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('products.addToCart');
     Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->name('products.addToCartView');

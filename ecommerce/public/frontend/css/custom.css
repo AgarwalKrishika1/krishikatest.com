@@ -1,9 +1,0 @@
-.product-image {
-    width: 200px;  /* or any desired width */
-    height: 200px; /* or any desired height */
-    object-fit: cover;  /* To maintain aspect ratio and cover the space */
-}
-
-    .text-wrap{
-        width: fit-content;
-    }

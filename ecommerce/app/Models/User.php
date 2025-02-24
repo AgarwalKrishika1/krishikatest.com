@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
     ];
 
     /**
@@ -42,22 +43,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    const ROLE_ADMIN = 'admin';
-    const ROLE_CUSTOMER = 'customer';
-
-    /**
-     * Check if the user is an admin
-     */
-    public function isAdmin()
+    public function getTypeAttribute($value)
     {
-        return $this->role === self::ROLE_ADMIN;
-    }
-
-    /**
-     * Check if the user is a customer
-     */
-    public function isCustomer()
-    {
-        return $this->role === self::ROLE_CUSTOMER;
+        $roles = ["user", "admin"];
+        
+        return $roles[$value] ?? null; // Return the role based on the value, or null if the value is invalid
     }
 }

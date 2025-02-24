@@ -1,4 +1,4 @@
-
+{{-- 
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-   
+    --}}
 
 <!DOCTYPE html>
 <html>
@@ -74,7 +74,7 @@
 </style>
 </body>
 </html>
-@stop
+{{-- @stop --}}
 
 @section('css')
     {{-- Add here extra stylesheets --}}

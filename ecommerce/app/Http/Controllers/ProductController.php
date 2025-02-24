@@ -17,44 +17,53 @@ class ProductController extends Controller
     return view('products.index', compact('products'));
 }
 
-public function show(Products $product)
+public function showProducts()
 {
-    return view('products.show', compact('product'));
+    // Fetch all saved products from the database
+    $products = Products::all();
+
+    return view('products.product', compact('products'));
 }
 
+public function fetchAndSaveProducts()
+{
+    // Instantiate Guzzle HTTP client
+    $client = new Client();
 
-    public function fetchAndSaveProducts()
-    {
-        // Instantiate Guzzle HTTP client
-        $client = new Client();
+    // API URL (fake eCommerce API for this example)
+    $url = 'https://fakestoreapi.com/products';
 
-        // API URL (fake eCommerce API for this example)
-        $url = 'https://fakestoreapi.com/products';
+    // Make the GET request
+    $response = $client->get($url);
 
-        // Make the GET request
-        $response = $client->get($url);
+    // Parse the JSON response
+    $products = json_decode($response->getBody(), true);
 
-        // Parse the JSON response
-        $products = json_decode($response->getBody(), true);
-        // dd($products);
-        // Iterate through the products and save to the database
-        foreach ($products as $productData) {
-            // Assuming you have a Product model with `name`, `price`, `description`, etc.
-            Products::create([
-                'name' => $productData['title'],
-                'price' => $productData['price'],
-                'description' => $productData['description'],
-                'category' => $productData['category'],
-                'image' => $productData['image'],
-            ]);
-        }
-        $savedProducts = Products::all();
-        return response()->json([
-            'message' => 'Products fetched and saved successfully.',
-            'products' => $savedProducts
-        ]);
+    // Prepare an array for batch insertion
+    $productData = [];
+    foreach ($products as $product) {
+        $productData[] = [
+            'name' => $product['title'],
+            'price' => $product['price'],
+            'description' => $product['description'],
+            'category' => $product['category'],
+            'image' => $product['image'],
+            'created_at' => now(), // Add timestamps
+            'updated_at' => now(), // Add timestamps
+        ];
     }
 
+    // Insert all products at once
+    Products::insert($productData);
+
+    // Fetch all saved products (if needed)
+    $savedProducts = Products::all();
+
+    return response()->json([
+        'message' => 'Products fetched and saved successfully.',
+        'products' => $savedProducts
+    ]);
+}
     // Add product to cart
     public function addToCart($id)
 {

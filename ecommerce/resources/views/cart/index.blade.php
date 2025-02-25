@@ -1,22 +1,27 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Cart</h1>
-@stop
-
-@section('content')
+@include('frontend.header')
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="/images/favicon.png" type="">
+    <title>E-commerce website</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/home/css/bootstrap.css" />
+    <!-- font awesome style -->
+    <link href="/home/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/home/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="/home/css/responsive.css" rel="stylesheet" />
 </head>
 <body>
 <h2>Your Cart</h2>
@@ -69,20 +74,19 @@
     <p>Your cart is empty.</p>
 @endif
 
+ <!-- jQery -->
+ <script src="/home/js/jquery-3.4.1.min.js"></script>
+ <!-- popper js -->
+ <script src="/home/js/popper.min.js"></script>
+ <!-- bootstrap js -->
+ <script src="/home/js/bootstrap.js"></script>
+ <!-- custom js -->
+ <script src="/home/js/custom.js"></script>
+
 </body>
 </html>
 
-@stop
-
-@section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-@stop
-
-@section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-@stop
-
+@include('frontend.footer')
 
 
 

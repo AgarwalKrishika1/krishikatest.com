@@ -1,13 +1,31 @@
-@extends('adminlte::page')
+@include('frontend.header')
+<head>
+    <link rel="shortcut icon" href={{"/images/favicon.png"}} type="">
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href={{"/home/css/bootstrap.css"}} />
+    <!-- font awesome style -->
+    <link href={{"/home/css/font-awesome.min.css"}} rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href={{"/home/css/style.css"}} rel="stylesheet" />
+    <!-- responsive style -->
+    <link href={{"/home/css/responsive.css"}} rel="stylesheet" />
+</head>
 
-@section('content')
-
-<div class="card card-default">
-    <div class="card-header">
-        Laravel - Razorpay Payment Gateway Integration
-    </div>
-    <div class="card-body text-center">
-        
+<section>
+    <section class="inner_page_head">
+        <div class="container_fuild">
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="full">
+                    <h3>payment</h3>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </section>
+        <section>         
+            <br>
+        </section>
         <form action="{{ route('razorpay.payment.store') }}" method="POST" >
 
             <?php
@@ -45,4 +63,15 @@
     </div>
   
 </div>
-@endsection
+</section>
+
+<body>
+ <!-- jQery -->
+ <script src="home/js/jquery-3.4.1.min.js"></script>
+ <!-- popper js -->
+ <script src="home/js/popper.min.js"></script>
+ <!-- bootstrap js -->
+ <script src="home/js/bootstrap.js"></script>
+ <!-- custom js -->
+ <script src="home/js/custom.js"></script>
+</body>

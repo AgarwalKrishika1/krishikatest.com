@@ -81,7 +81,7 @@ Route::middleware('auth')->group(function () {
         return "This is trial website using php laravel";
     });
 
-    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
    
     Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('products.addToCart');
     Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->name('products.addToCartView');

@@ -1,48 +1,91 @@
 <!-- shipping.blade.php -->
-@extends('layouts.app')
+{{-- @extends('layouts.app') --}}
 
-@extends('adminlte::page')
+{{-- @extends('adminlte::page') --}}
+{{-- @include('frontend.header') --}}
 
-
-@section('title', 'Dashboard')
+{{-- @section('title', 'Dashboard')
 
 @section('content_header')
     <h1>Products</h1>
 @stop
 
-@section('content')
-<div class="container">
-    <h2>Enter Shipping Information</h2>
-    <form action="{{ route('order.saveShipping') }}" method="POST">
-        @csrf
-        <input type="hidden" name="order_id" value="{{ $order->id }}">
+@section('content') --}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="images/favicon.png" type="">
+    <title>E-commerce website</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
+    <!-- font awesome style -->
+    <link href="home/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="home/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="home/css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <section>
+        <div class="container">
+            <h2>Enter Shipping Information</h2>
+            <form action="{{ route('order.saveShipping') }}" method="POST">
+                @csrf
+                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" class="form-control" required>
+                </div>
         
-        <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" id="address" name="address" class="form-control" required>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" class="form-control" required>
+                </div>
+        
+                <div class="form-group">
+                    <label for="postal_code">Postal Code</label>
+                    <input type="text" id="postal_code" name="postal_code" class="form-control" required>
+                </div>
+        
+                <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+            </form>
         </div>
+        </section>
+        
+        
+ <!-- jQery -->
+ <script src="home/js/jquery-3.4.1.min.js"></script>
+ <!-- popper js -->
+ <script src="home/js/popper.min.js"></script>
+ <!-- bootstrap js -->
+ <script src="home/js/bootstrap.js"></script>
+ <!-- custom js -->
+ <script src="home/js/custom.js"></script>
 
-        <div class="form-group">
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" class="form-control" required>
-        </div>
+</body>
+</html>
 
-        <div class="form-group">
-            <label for="postal_code">Postal Code</label>
-            <input type="text" id="postal_code" name="postal_code" class="form-control" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Proceed to Payment</button>
-    </form>
-</div>
-
-@stop
-
-@section('css')
+@include('frontend.footer')
+{{-- @stop --}}
+{{-- 
+@section('css') --}}
     {{-- Add here extra stylesheets --}}
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-@stop
+{{-- @stop --}}
 
-@section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-@stop
+{{-- @section('js')
+    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script> --}}
+{{-- @stop --}}

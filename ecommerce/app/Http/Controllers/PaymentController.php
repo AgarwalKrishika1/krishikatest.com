@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
-   public function showPaymentForm($orderId)
+   public function showPaymentForm(Request $request)
     {
-        $order = Order::findOrFail($orderId);
+      $shipping = $request->session()->get('shipping_data');
+
         //dd($order);
-      return view('payment.form');
+      return view('payment.form', compact('shipping'));
     }
 
     // public function processPayment(Request $request, $orderId)

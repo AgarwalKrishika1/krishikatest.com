@@ -24,6 +24,14 @@ public function fetchProductsByCategory($category)
     return view('products.productByCategory', compact('productsByCategory'));
 }
 
+public function fetchSortedProducts()
+{
+    // Fetch products by the given category
+    $sortedProducts = Products::orderBy('name', 'desc')->get();
+    return view('products.sortedProduct', compact('sortedProducts'));
+}
+
+
 public function fetchAndSaveProducts()
 {
     // Instantiate Guzzle HTTP client

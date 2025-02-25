@@ -78,9 +78,11 @@ Route::group(['middleware' => ['auth','admin']], function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-
+    
     Route::get('/products/{category}', [ProductController::class, 'fetchProductsByCategory']);
     
+    Route::get('/sortedProducts', [ProductController::class, 'fetchSortedProducts']);
+
     Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('products.addToCart');
     Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->name('products.addToCartView');
     Route::delete('/add-to-cart/{index}', [CartController::class, 'remove'])->name('cart.remove');
@@ -102,8 +104,29 @@ Route::get('/fetch-products', [ProductController::class, 'fetchAndSaveProducts']
 
 
 
+// email
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+
+use Illuminate\Http\Request;
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
 

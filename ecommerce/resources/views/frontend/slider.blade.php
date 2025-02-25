@@ -14,13 +14,13 @@
                             Sale 20% Off
                             </span>
                             <br>
-                            On Everything
+                            On Jewelery
                          </h1>
                          <p>
-                            Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                            
                          </p>
                          <div class="btn-box">
-                            <a href="" class="btn1">
+                            <a href="/products/jewelery" class="btn1">
                             Shop Now
                             </a>
                          </div>
@@ -36,16 +36,16 @@
                       <div class="detail-box">
                          <h1>
                             <span>
-                            Sale 20% Off
+                            Sale 10% Off
                             </span>
                             <br>
-                            On Everything
+                            On Electronics
                          </h1>
                          <p>
-                            Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                           
                          </p>
                          <div class="btn-box">
-                            <a href="" class="btn1">
+                            <a href="/products/electronics" class="btn1">
                             Shop Now
                             </a>
                          </div>
@@ -61,16 +61,16 @@
                       <div class="detail-box">
                          <h1>
                             <span>
-                            Sale 20% Off
+                            Sale 5% Off
                             </span>
                             <br>
                             On Everything
                          </h1>
                          <p>
-                            Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                            
                          </p>
                          <div class="btn-box">
-                            <a href="" class="btn1">
+                            <a href="/products" class="btn1">
                             Shop Now
                             </a>
                          </div>

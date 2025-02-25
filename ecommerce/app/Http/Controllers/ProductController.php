@@ -17,13 +17,12 @@ class ProductController extends Controller
     return view('products.product', compact('products'));
 }
 
-// public function showProducts()
-// {
-//     // Fetch all saved products from the database
-//     $products = Products::all();
-
-//     return view('products.product', compact('products'));
-// }
+public function fetchProductsByCategory($category)
+{
+    // Fetch products by the given category
+    $productsByCategory = Products::where('category', $category)->get();
+    return view('products.productByCategory', compact('productsByCategory'));
+}
 
 public function fetchAndSaveProducts()
 {
@@ -42,19 +41,26 @@ public function fetchAndSaveProducts()
     // Prepare an array for batch insertion
     $productData = [];
     foreach ($products as $product) {
-        $productData[] = [
-            'name' => $product['title'],
-            'price' => $product['price'],
-            'description' => $product['description'],
-            'category' => $product['category'],
-            'image' => $product['image'],
-            'created_at' => now(), // Add timestamps
-            'updated_at' => now(), // Add timestamps
-        ];
+        // Check if product already exists
+        $existingProduct = Products::where('name', $product['title'])->first();
+
+        if (!$existingProduct) {
+            $productData[] = [
+                'name' => $product['title'],
+                'price' => $product['price'],
+                'description' => $product['description'],
+                'category' => $product['category'],
+                'image' => $product['image'],
+                'created_at' => now(), // Add timestamps
+                'updated_at' => now(), // Add timestamps
+            ];
+        }
     }
 
-    // Insert all products at once
-    Products::insert($productData);
+    // Insert all products that do not already exist
+    if (!empty($productData)) {
+        Products::insert($productData);
+    }
 
     // Fetch all saved products (if needed)
     $savedProducts = Products::all();
@@ -64,6 +70,7 @@ public function fetchAndSaveProducts()
         'products' => $savedProducts
     ]);
 }
+
     // Add product to cart
     public function addToCart($id)
 {

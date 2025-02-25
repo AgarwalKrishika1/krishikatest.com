@@ -20,7 +20,7 @@ class CreateUsersSeeder extends Seeder
 
                'name'=>'Admin User',
 
-               'email'=>'admin@itsolutionstuff.com',
+               'email'=>'admin@gmail.com',
 
                'type'=>1,
 
@@ -33,7 +33,7 @@ class CreateUsersSeeder extends Seeder
 
                'name'=>'User',
 
-               'email'=>'user@itsolutionstuff.com',
+               'email'=>'user@gmail.com',
 
                'type'=>0,
 

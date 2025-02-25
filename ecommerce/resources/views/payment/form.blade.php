@@ -26,6 +26,49 @@
         <section>         
             <br>
         </section>
+
+        <div class="container">
+            <h4>Your Cart</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        //$cart = json_decode(cookie('cart'), true); // Retrieve cart details from cookie
+                        $cart = json_decode(Cookie::get('cart'), true);
+                        $cartTotal = 0;
+                    @endphp
+
+                    @if($cart && count($cart) > 0)
+                        @foreach($cart as $item)
+                            @php
+                                $itemTotal = $item['price'] * $item['quantity'];
+                                $cartTotal += $itemTotal;
+                            @endphp
+                            <tr>
+                                <td>{{ $item['name'] }}</td>
+                                <td>{{ $item['price'] }}</td>
+                                <td>{{ $item['quantity'] }}</td>
+                                <td>{{ $itemTotal }}</td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="4">No items in cart.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+
+            <h5>Total Amount: ₹{{ $cartTotal }}</h5>
+        </div>
+
         <form action="{{ route('razorpay.payment.store') }}" method="POST" >
 
             <?php

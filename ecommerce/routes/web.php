@@ -25,20 +25,20 @@ Route::get('/', function () {
     return view('frontend.master');
 });
 
-Route::get('/about', function () {
+Route::get('about', function () {
     return view('about');
 });
 
-Route::get('/testimonial', function () {
+Route::get('testimonial', function () {
     return view('testimonial');
 });
 
-Route::get('/blog_list', function () {
+Route::get('blog', function () {
     return view('blog_list');
 });
 
 
-Route::get('/contact', function () {
+Route::get('contact', function () {
     return view('contact');
 });
 
@@ -77,12 +77,10 @@ Route::group(['middleware' => ['auth','admin']], function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/information', function () {
-        return "This is trial website using php laravel";
-    });
-
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-   
+
+    Route::get('/products/{category}', [ProductController::class, 'fetchProductsByCategory']);
+    
     Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('products.addToCart');
     Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->name('products.addToCartView');
     Route::delete('/add-to-cart/{index}', [CartController::class, 'remove'])->name('cart.remove');

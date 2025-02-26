@@ -26,7 +26,7 @@
                       {{-- <li><a href="#">Services</a></li> --}}
                       <li><a href="/testimonial">Testimonial</a></li>
                       <li><a href="/blog">Blog</a></li>
-                      <li><a href="">Contact</a></li>
+                      <li><a href="/contact">Contact</a></li>
                    </ul>
                 </div>
              </div>
@@ -35,7 +35,7 @@
                    <h3>Account</h3>
                    <ul>
                       <li><a href="/">Account</a></li>
-                      <li><a href="/checkout">Checkout</a></li>
+                      <li><a href="/logout">Checkout</a></li>
                       <li><a href="/login">Login</a></li>
                       <li><a href="/register">Register</a></li>
                       <li><a href="/products">Shopping</a></li>
@@ -52,7 +52,7 @@
                      <p>Subscribe by our newsletter and get update protidin.</p>
                    </div>
                    <div class="form_sub">
-                      <form>
+                      <form action="/subscribed">
                          <fieldset>
                             <div class="field">
                                <input type="email" placeholder="Enter Your Mail" name="email" />
@@ -68,3 +68,4 @@
        </div>
     </div>
  </footer>
+ g

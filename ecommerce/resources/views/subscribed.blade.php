@@ -21,6 +21,7 @@
       <!-- responsive style -->
       <link href="/home/css/responsive.css" rel="stylesheet" />
    </head>
+
    <body class="sub_page">
       <div class="hero_area">
          <!-- header section strats -->
@@ -33,19 +34,22 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="full">
-                     <h3>About us</h3>
+                     <h3>You have successfully subscribed</h3>
                   </div>
                </div>
             </div>
          </div>
       </section>
       <!-- end inner page section -->
-      <!-- why section -->
-      @include('frontend.why')
-      <!-- end why section -->
-      <!-- arrival section -->
-     @include('frontend.arrival')
-      <!-- end arrival section -->
+      
+      <section> 
+        <form action="/">
+        <button>
+               Home page 
+        </button>    
+        </form>
+    </section>
+
       <!-- footer section -->
      @include('frontend.footer')
       <!-- footer section -->

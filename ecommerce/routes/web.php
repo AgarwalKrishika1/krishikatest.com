@@ -25,6 +25,11 @@ Route::get('/', function () {
     return view('frontend.master');
 });
 
+Route::get('/subscribed', function () {
+    return view('subscribed');
+});
+
+
 Route::get('about', function () {
     return view('about');
 });
@@ -46,16 +51,16 @@ Route::get('/a', [TemplateController::class,'index'])->name('templateHome');
 
 Route::get('/dashboard', function () {
     return view('frontend.home');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // normal user
 Route::middleware(['auth', 'user-access:user'])->group(function () {
 
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
 });
 
@@ -75,7 +80,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
 });
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     
@@ -93,7 +98,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('checkout', [OrderController::class, 'checkout'])->name('order.checkout');
     
-   Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show');
+   Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show')->middleware('verified');
 
 
 Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
@@ -104,7 +109,7 @@ Route::get('/fetch-products', [ProductController::class, 'fetchAndSaveProducts']
 
 
 
-// email
+// email verification
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');

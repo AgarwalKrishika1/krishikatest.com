@@ -1,4 +1,4 @@
-
+{{-- 
 @include('adminlte::page')
 <!DOCTYPE html>
 <html>
@@ -29,4 +29,4 @@
     }
 </style>
 </body>
-</html>
+</html> --}}

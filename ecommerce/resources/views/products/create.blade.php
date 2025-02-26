@@ -1,4 +1,4 @@
-@include('adminlte::page')
+{{-- @include('adminlte::page')
 
 <div>
   <div class="float-start">
@@ -43,4 +43,4 @@
   </form>
 </div>
 
-
+ --}}

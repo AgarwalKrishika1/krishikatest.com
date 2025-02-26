@@ -1,17 +1,3 @@
-<!-- shipping.blade.php -->
-{{-- @extends('layouts.app') --}}
-
-{{-- @extends('adminlte::page') --}}
-{{-- @include('frontend.header') --}}
-
-{{-- @section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Products</h1>
-@stop
-
-@section('content') --}}
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,13 +65,3 @@
 </html>
 
 @include('frontend.footer')
-{{-- @stop --}}
-{{-- 
-@section('css') --}}
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-{{-- @stop --}}
-
-{{-- @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script> --}}
-{{-- @stop --}}

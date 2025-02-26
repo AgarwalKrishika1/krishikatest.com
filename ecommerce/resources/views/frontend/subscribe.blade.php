@@ -8,8 +8,8 @@
                       <h3>Subscribe To Get Discount Offers</h3>
                    </div>
                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-                   <form action="">
-                      <input type="email" placeholder="Enter your email">
+                   <form action="/subscribed">
+                      <input type="email" name="email" placeholder="Enter your email">
                       <button>
                       subscribe
                       </button>

@@ -34,11 +34,30 @@
                 <div class="widget_menu">
                    <h3>Account</h3>
                    <ul>
+                      {{-- <li><a href="/">Account</a></li>
+                      <li><a href="/logout">Checkout</a></li>
+                       --}}
+                      @if (Route::has('login'))
+               
+                      @auth
                       <li><a href="/">Account</a></li>
                       <li><a href="/logout">Checkout</a></li>
-                      <li><a href="/login">Login</a></li>
-                      <li><a href="/register">Register</a></li>
                       <li><a href="/products">Shopping</a></li>
+
+                       @else
+                       <li><a href="/">Account</a></li>
+                       <li><a href="/checkout">Checkout</a></li>
+                       <li><a href="/login">Login</a></li>
+                      <li><a href="/register">Register</a></li>
+                       <li><a href="/products">Shopping</a></li>
+                      @endauth
+                     @endif
+
+
+
+                      {{-- <li><a href="/login">Login</a></li>
+                      <li><a href="/register">Register</a></li>
+                      <li><a href="/products">Shopping</a></li> --}}
                       {{-- <li><a href="#">Widget</a></li> --}}
                    </ul>
                 </div>
@@ -68,4 +87,3 @@
        </div>
     </div>
  </footer>
- g

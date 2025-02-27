@@ -49,4 +49,11 @@ class User extends Authenticatable implements MustVerifyEmail
         
         return $roles[$value] ?? null; // Return the role based on the value, or null if the value is invalid
     }
+
+    public function cart_items()
+    {
+        return $this->hasMany(cart_item::class);
+    }
+
+
 }

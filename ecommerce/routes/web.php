@@ -58,7 +58,7 @@ require __DIR__.'/auth.php';
 //this raise a issue at registration if user no verified
 // Auth::routes(['verify' => true]);
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // normal user
 Route::middleware(['auth', 'user-access:user'])->group(function () {
@@ -124,7 +124,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/home');
+    return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 

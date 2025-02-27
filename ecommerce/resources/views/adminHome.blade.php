@@ -1,33 +1,28 @@
-@extends('layouts.app')
-
-  
-
-@section('content')
-
-<div class="container">
-
-    <div class="row justify-content-center">
-
-        <div class="col-md-8">
-
-            <div class="card">
-
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-  
-
-                <div class="card-body">
-
-                    You are a Admin User.
-
-                </div>
-
-            </div>
-
-        </div>
-
+<!DOCTYPE html>
+<html>
+  <head> 
+    @include('admin.css')
+  </head>
+  <body>
+    @include('admin.header')
+    <div class="d-flex align-items-stretch">
+      <!-- Sidebar Navigation-->
+      @include('admin.sidebar')
+      <!-- Sidebar Navigation end-->
+      <div class="page-content">
+        <div class="page-header">
+          <div class="container-fluid">
+            @include('admin.content')
+      </div>
     </div>
-
-</div>
-
-@endsection
+    <!-- JavaScript files-->
+    <script src="/admincss/vendor/jquery/jquery.min.js"></script>
+    <script src="/admincss/vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="/admincss/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/admincss/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/admincss/vendor/chart.js/Chart.min.js"></script>
+    <script src="/admincss/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="/admincss/js/charts-home.js"></script>
+    <script src="/admincss/js/front.js"></script>
+  </body>
+</html>

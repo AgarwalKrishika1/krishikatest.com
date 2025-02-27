@@ -21,7 +21,7 @@ use App\Http\Controllers\RazorpayPaymentController;
 |
 */
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('frontend.master');
 });
 
@@ -63,7 +63,7 @@ Auth::routes(['verify' => true]);
 // normal user
 Route::middleware(['auth', 'user-access:user'])->group(function () {
 
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 });
 
@@ -76,17 +76,18 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::group(['middleware' => ['auth','admin']], function () {
-    Route::get('/dashboard', function () {
-        return "ADMIN";
-    });
-});
+// Route::group(['middleware' => ['auth','admin']], function () {
+//     Route::get('/dashboard', function () {
+//         return "ADMIN";
+//     });
+// });
 
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    
+   
     Route::get('/products/{category}', [ProductController::class, 'fetchProductsByCategory']);
     
     Route::get('/sortedProducts', [ProductController::class, 'fetchSortedProducts']);

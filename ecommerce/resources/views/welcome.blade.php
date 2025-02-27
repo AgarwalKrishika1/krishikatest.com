@@ -1,4 +1,4 @@
-{{-- @extends('adminlte::page')
+@extends('adminlte::page')
 
 @section('title', 'Dashboard')
 
@@ -16,12 +16,12 @@
     
 @stop
 
-@section('css') --}}
+@section('css')
     {{-- Add here extra stylesheets --}}
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 
-{{-- @stop
+@stop
 
 @section('js')
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-@stop --}}
+@stop

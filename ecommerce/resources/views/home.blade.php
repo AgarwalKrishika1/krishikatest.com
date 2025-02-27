@@ -22,8 +22,8 @@
 </div>
 @endsection --}}
 
-@include('frontend.master')
 
+<html>
 <head>
     <!-- Basic -->
     <meta charset="utf-8" />
@@ -47,6 +47,7 @@
  </head>
  
  <body>
+    @include('frontend.master')
      <!-- jQery -->
      <script src="/home/js/jquery-3.4.1.min.js"></script>
      <!-- popper js -->
@@ -56,3 +57,4 @@
      <!-- custom js -->
      <script src="/home/js/custom.js"></script>
  </body>
+</html>

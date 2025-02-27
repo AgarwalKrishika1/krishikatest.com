@@ -34,7 +34,7 @@
                    <div class="img_container">
                       <div class="img-box">
                          <div class="img_box-inner">
-                            <img src="images/p1.jpg" alt="">
+                            <img src="images/p1.png" alt="">
                          </div>
                       </div>
                    </div>
@@ -56,7 +56,7 @@
                    <div class="img_container">
                       <div class="img-box">
                          <div class="img_box-inner">
-                            <img src="images/p2.jpg" alt="">
+                            <img src="images/p2.png" alt="">
                          </div>
                       </div>
                    </div>

@@ -21,7 +21,7 @@ use App\Http\Controllers\RazorpayPaymentController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('frontend.master');
 });
 
@@ -51,11 +51,14 @@ Route::get('/a', [TemplateController::class,'index'])->name('templateHome');
 
 Route::get('/dashboard', function () {
     return view('frontend.home');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
-Auth::routes(['verify' => true]);
+//this raise a issue at registration if user no verified
+// Auth::routes(['verify' => true]);
+
+Auth::routes();
 
 // normal user
 Route::middleware(['auth', 'user-access:user'])->group(function () {

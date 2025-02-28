@@ -94,10 +94,7 @@
                </li>
                
                <li class="nav-item">
-                  {{-- <a class="btn btn-primary" href="{{route('logout')}}" 
-                  style="margin-right: 10px; margin-left: 10px;">Logout</a> --}}
-                  
-
+            
                   <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">

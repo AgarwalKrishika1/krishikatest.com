@@ -83,7 +83,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 // });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    
+Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('products.addToCart');
+Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->name('products.addToCartView');
+Route::delete('/add-to-cart/{index}', [CartController::class, 'remove'])->name('cart.remove');
+
 
 Route::middleware(['auth'])->group(function () {
 
@@ -92,10 +95,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/sortedProducts', [ProductController::class, 'fetchSortedProducts']);
 
-    Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('products.addToCart');
-    Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->name('products.addToCartView');
-    Route::delete('/add-to-cart/{index}', [CartController::class, 'remove'])->name('cart.remove');
-    
+   
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
     Route::get('/order/{orderId}/shipping', [OrderController::class, 'shippingForm'])->name('order.shippingForm');
     Route::post('/order/save-shipping', [OrderController::class, 'saveShipping'])->name('order.saveShipping');

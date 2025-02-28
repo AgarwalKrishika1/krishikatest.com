@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
 
@@ -59,8 +60,8 @@ public function fetchAndSaveProducts()
                 'description' => $product['description'],
                 'category' => $product['category'],
                 'image' => $product['image'],
-                'created_at' => now(), // Add timestamps
-                'updated_at' => now(), // Add timestamps
+                'created_at' => now(), 
+                'updated_at' => now(), 
             ];
         }
     }
@@ -79,8 +80,7 @@ public function fetchAndSaveProducts()
     ]);
 }
 
-    // Add product to cart
-    public function addToCart($id)
+public function addToCart($id)
 {
     $product = Products::find($id);
 
@@ -88,41 +88,77 @@ public function fetchAndSaveProducts()
         return redirect()->route('products.index')->with('error', 'Product not found!');
     }
     
-    // Retrieve the cart from the cookie
-    $cart = json_decode(Cookie::get('cart', '[]'), true); // Get cart, default to empty array if not set
-    // Check if the product already exists in the cart
-    // if (isset($cart[$id])) {
-        //     $cart[$id]['quantity']++; // Increase quantity if product is already in the cart
-    // } else {
-        //     $cart[$id] = [
-    //         'name' => $product->name,
-    //         'price' => $product->price,
-    //         'quantity' => 1,
-    //         'image' => $product->image
-    //     ];
-    // }
-  
-    $cart[] = [
-        'name' => $product->name,
-        'price' => $product->price,
-        'quantity' => 1,
-        'image' => $product->image
-    ];
-    
-    Cookie::queue(Cookie::forget('$cart'));
-    Cookie::queue('cart', json_encode($cart), 60); // Store for 60min
-    return redirect()->route('products.addToCartView') ;
+    // Check if the user is logged in
+    if (Auth::check()) {
+        
+        $cart = session('cart', []); 
 
+        //product already in cart
+        $found = false;
+        foreach ($cart as &$cartItem) {
+            if ($cartItem['name'] == $product->name) {
+                $cartItem['quantity']++; 
+                $found = true;
+                break;
+            }
+        }
+
+        // add product to cart
+        if (!$found) {
+            $cart[] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => 1,
+                'image' => $product->image
+            ];
+        }
+
+        // store cart to session
+        session(['cart' => $cart]);
+
+    } else {
+        // For non-logged-in users, retrieve the cart from the cookie
+        $cart = json_decode(Cookie::get('cart', '[]'), true);
+
+        // product already in cart
+        $found = false;
+        foreach ($cart as &$cartItem) {
+            if ($cartItem['name'] == $product->name) {
+                $cartItem['quantity']++; // Increase quantity if product is already in the cart
+                $found = true;
+                break;
+            }
+        }
+
+        // add to cart
+        if (!$found) {
+            $cart[] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => 1,
+                'image' => $product->image
+            ];
+        }
+
+        Cookie::queue('cart', json_encode($cart), 60); // Store cart for 60 minutes
+    }
+
+    return redirect()->route('products.addToCartView');
 }
 
-public function addToCartView(Request $request){
-    
-    $cart = json_decode(Cookie::get('cart', '[]'), true);
-    // echo"<pre>";
-    // print_r($_COOKIE);exit;
-    return view('cart.index', compact('cart'));
-  
 
-  
+public function addToCartView(Request $request){
+
+    // Check if the user is logged in
+    if (Auth::check()) {
+        // Retrieve the cart from the session for logged-in users   
+        $cart = session('cart', []);
+    } else {
+        // For non-logged-in users, retrieve the cart from the cookie
+        $cart = json_decode(Cookie::get('cart', '[]'), true);
+    }
+
+    return view('cart.index', compact('cart'));
+
 }
 }

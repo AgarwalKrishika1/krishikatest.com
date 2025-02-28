@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -67,7 +68,8 @@ class LoginController extends Controller
                 return redirect()->route('admin.home');
 
             }else{
-
+                
+                $this->restoreCart($request);
                 return redirect('/');
 
             }
@@ -79,8 +81,18 @@ class LoginController extends Controller
                 ->with('error','Email-Address And Password Are Wrong.');
 
         }
-
-          
-
     }
+
+    public function restoreCart(Request $request)
+{
+    // Check if the cart cookie exists
+    if (Cookie::has('cart_logged')) {
+        // Retrieve the cart data from the cookie
+        $cart = json_decode(Cookie::get('cart_logged'), true); // Decode the cart data from JSON
+        
+        // Optionally, restore the cart to the session
+        session(['cart' => $cart]);
+    }
+}
+
 }

@@ -90,7 +90,6 @@ public function fetchAndSaveProducts()
     
     // Retrieve the cart from the cookie
     $cart = json_decode(Cookie::get('cart', '[]'), true); // Get cart, default to empty array if not set
-    
     // Check if the product already exists in the cart
     // if (isset($cart[$id])) {
         //     $cart[$id]['quantity']++; // Increase quantity if product is already in the cart
@@ -102,13 +101,14 @@ public function fetchAndSaveProducts()
     //         'image' => $product->image
     //     ];
     // }
+  
     $cart[] = [
         'name' => $product->name,
         'price' => $product->price,
         'quantity' => 1,
         'image' => $product->image
     ];
-    // dd($cart);
+    
     Cookie::queue(Cookie::forget('$cart'));
     Cookie::queue('cart', json_encode($cart), 60); // Store for 60min
     return redirect()->route('products.addToCartView') ;

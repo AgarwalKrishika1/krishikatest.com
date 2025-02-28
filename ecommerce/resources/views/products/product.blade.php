@@ -42,8 +42,23 @@
       </section>
       <!-- end inner page section -->
       <!-- product section -->
+     
      <section class="product_section">
+   
    <div class="container">
+      <style>
+         
+         </style>
+         <br>
+         <div class="dropdown">
+           <button class="dropbtn">Filter by Categories</button>
+           <div class="dropdown-content">
+             <a href="/products/jewelery">Jewelery</a>
+             <a href="/products/electronics">Electronics</a>
+             <a href="/products/men's clothing">Men's clothing</a>
+             <a href="/products/women's clothing">Women's clothing</a>
+           </div>
+         </div>
       <div class="row">
          
          @foreach($products as $product)
@@ -54,7 +69,7 @@
                      <a href="{{route('products.addToCart', $product->id)}}" class="option1">
                         Add To Cart
                      </a>
-                     <a href="checkout" class="option2">
+                     <a href="{{route('products.addToCart', $product->id)}}" class="option2">
                         Buy Now
                      </a>
                   </div>

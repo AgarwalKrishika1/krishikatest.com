@@ -88,7 +88,11 @@
                @if (Route::has('login'))
                
                @auth
-               Welcome {{ Auth::user()->name }} 
+
+               <li class="nav-item">
+                 Welcome {{ Auth::user()->name }} 
+               </li>
+               
                <li class="nav-item">
                   {{-- <a class="btn btn-primary" href="{{route('logout')}}" 
                   style="margin-right: 10px; margin-left: 10px;">Logout</a> --}}

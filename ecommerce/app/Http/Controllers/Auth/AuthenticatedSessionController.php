@@ -6,8 +6,8 @@ use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
@@ -45,29 +45,53 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-
-        // Get the logged-in user
-    $user = Auth::user();
-       
-    // Check if the user is logged in and has a cart in the session
-    if ($user && $request->session()->has('cart')) {
-        // Get the cart data from the session
-        $cartData = Session::get('cart');
-        //session()->flash('cart_data', $cartData);
-        // Save the cart to the database (or update if it already exists)
-        Cart::updateOrCreate(
-            ['user_id' => $user->id], // Look for the user by their ID
-            ['items' => json_encode($cartData)] // Store the cart items as a JSON string
-        );
-    }
-
-
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
+        return redirect('/');
+    }
+
+
+    public function customLogout(Request $request)
+    {
+        // Get the logged-in user
+        $user = Auth::user();
+
+        // Check if the user is logged in
+        if ($user) {
+            // Get the cart data from the session
+            $cartData = session('cart', []);
+
+            // Get the cart data from the cookie (if exists)
+            $cookieCart = json_decode(Cookie::get('cart', '[]'), true);
+
+            // Merge session cart and cookie cart data
+            $mergedCart = array_merge($cartData, $cookieCart);
+
+            // Save the merged cart data to the database
+            if (!empty($mergedCart)) {
+                Cart::updateOrCreate(
+                    ['user_id' => $user->id], // Find by user_id
+                    ['items' => json_encode($mergedCart)] // Store as JSON
+                );
+            }
+
+            // Optionally, clear the session and cookie cart after saving
+            session()->forget('cart');
+            Cookie::queue(Cookie::forget('cart'));
+        }
+
+        // Perform the logout
+        Auth::guard('web')->logout();
+
+        // Invalidate the session and regenerate the token
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Redirect after logout
         return redirect('/');
     }
 }

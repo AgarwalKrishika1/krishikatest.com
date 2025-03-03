@@ -41,7 +41,8 @@
                 <tbody>
                     @php
                         //$cart = json_decode(cookie('cart'), true); // Retrieve cart details from cookie
-                        $cart = json_decode(Cookie::get('cart'), true);
+                        //$cart = json_decode(Cookie::get('cart'), true);
+                        $cart = Session::get('cart');
                         $cartTotal = 0;
                     @endphp
 

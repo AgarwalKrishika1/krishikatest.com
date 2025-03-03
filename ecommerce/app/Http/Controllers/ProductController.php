@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use App\Models\Products;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -160,7 +161,26 @@ public function addToCart($id)
 
     // Check if the user is logged in
     if (Auth::check()) {
+        $user = Auth::user();
         $cart = session('cart', []); // Retrieve cart from session for logged-in users
+
+
+
+        // Check if the user has a cart in the database and merge it
+        $databaseCart = Cart::where('user_id', $user->id)->first();
+        if ($databaseCart) {
+            // Check if it's already an array or a JSON string
+            if (is_array($databaseCart->items)) {
+                $databaseCartItems = $databaseCart->items; // It's already an array
+            } else {
+                $databaseCartItems = json_decode($databaseCart->items, true); // Decode the JSON string
+            }
+
+            // Merge cart data from the database if any
+            $this->mergeDatabaseCartToSession($cart, $databaseCartItems);
+
+            
+        }
 
         // Merge guest cart if needed
         $this->mergeGuestCartToUserCart($cart);
@@ -249,6 +269,100 @@ protected function mergeGuestCartToUserCart(&$cart)
         Cookie::queue(Cookie::forget('cart'));
     }
 }
+
+
+// In your helper method where you merge database cart
+protected function mergeDatabaseCartToSession(&$cart, $databaseCartItems)
+{
+    // Check if the items field is already an array, if not decode it
+    if (!is_array($databaseCartItems)) {
+        $databaseCartItems = json_decode($databaseCartItems, true);
+    }
+
+    if (!empty($databaseCartItems)) {
+        foreach ($databaseCartItems as $dbItem) {
+            $found = false;
+            foreach ($cart as &$cartItem) {
+                if ($cartItem['name'] == $dbItem['name']) {
+                    $cartItem['quantity'] += $dbItem['quantity'];
+                    $found = true;
+                    break;
+                }
+            }
+
+            // If product is not found in the cart, add it
+            if (!$found) {
+                $cart[] = $dbItem;
+            }
+        }
+    }
+}
+
+
+
+public function addToCartView(Request $request)
+{
+    // Check if the user is logged in
+    if (Auth::check()) {
+
+        $user = Auth::user();
+
+        // Retrieve the cart from the session for logged-in users   
+        $cart = session('cart', []);
+
+
+        // Check if the user has a cart in the database and merge it
+        $databaseCart = Cart::where('user_id', $user->id)->first();
+        if ($databaseCart) {
+            // Ensure we decode only if it's a string
+            $databaseCartItems = is_array($databaseCart->items) 
+                                 ? $databaseCart->items 
+                                 : json_decode($databaseCart->items, true);
+            // Merge cart data from the database if any
+            $this->mergeDatabaseCartToSession($cart, $databaseCartItems);
+
+        }
+
+        // Check if there's a guest cart in the cookie
+        $guestCart = json_decode(Cookie::get('cart', '[]'), true);
+
+        if (!empty($guestCart)) {
+            // Merge guest cart items with the logged-in user's cart
+            foreach ($guestCart as $item) {
+                // Check if the product is already in the cart
+                $found = false;
+                foreach ($cart as &$cartItem) {
+                    if ($cartItem['name'] == $item['name']) {
+                        $cartItem['quantity'] += $item['quantity'];
+                        $found = true;
+                        break;
+                    }
+                }
+
+                // If the product is not found, add it
+                if (!$found) {
+                    $cart[] = $item;
+                }
+            }   
+
+
+
+            // Store the merged cart in the session
+            session(['cart' => $cart]);
+
+            // Remove guest cart cookie
+            Cookie::queue(Cookie::forget('cart'));
+        }
+
+    } else {
+        // For non-logged-in users (guest users), retrieve the cart from the cookie
+        $cart = json_decode(Cookie::get('cart', '[]'), true);
+        
+    }
+
+    return view('cart.index', compact('cart'));
+}
+
 
 // public function addToCartView(Request $request)
 // {
@@ -340,50 +454,5 @@ protected function mergeGuestCartToUserCart(&$cart)
 
 //     return view('cart.index', compact('cart'));
 // }
-
-public function addToCartView(Request $request)
-{
-    // Check if the user is logged in
-    if (Auth::check()) {
-        // Retrieve the cart from the session for logged-in users   
-        $cart = session('cart', []);
-
-        // Check if there's a guest cart in the cookie
-        $guestCart = json_decode(Cookie::get('cart', '[]'), true);
-
-        if (!empty($guestCart)) {
-            // Merge guest cart items with the logged-in user's cart
-            foreach ($guestCart as $item) {
-                // Check if the product is already in the cart
-                $found = false;
-                foreach ($cart as &$cartItem) {
-                    if ($cartItem['name'] == $item['name']) {
-                        $cartItem['quantity'] += $item['quantity'];
-                        $found = true;
-                        break;
-                    }
-                }
-
-                // If the product is not found, add it
-                if (!$found) {
-                    $cart[] = $item;
-                }
-            }
-
-            // Store the merged cart in the session
-            session(['cart' => $cart]);
-
-            // Remove guest cart cookie
-            Cookie::queue(Cookie::forget('cart'));
-        }
-
-    } else {
-        // For non-logged-in users (guest users), retrieve the cart from the cookie
-        $cart = json_decode(Cookie::get('cart', '[]'), true);
-    }
-
-    return view('cart.index', compact('cart'));
-}
-
 
 }

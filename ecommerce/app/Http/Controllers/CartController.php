@@ -67,23 +67,25 @@ public function remove($index)
     // Retrieve the cart from the cookie
     
     $cart = json_decode(Cookie::get('cart', '[]'), true); // Get the cart from the cookie, default to empty array if not set
-    
+   
     // Check if the item exists in the cart
     if (isset($cart[$index])) {
         // Remove the item from the cart
         unset($cart[$index]);
        
         $cart = array_values($cart);
-        
+       
         // If the cart is empty after removal, clear the cookie
         if (empty($cart)) {
             // Forget the cart cookie
+           
             $cart = [];
-            return redirect('/products')->with('success', 'Cart is now empty');
+            return redirect('/products');
         } else {
             
             // Otherwise, update the cookie with the modified cart
             Cookie::queue('cart', json_encode($cart), 60 ); // Store for 60min (or set your preferred expiration time)
+          
             return redirect()->back()->with('success', 'Item removed from cart');
         }
     }

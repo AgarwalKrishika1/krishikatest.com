@@ -92,7 +92,7 @@
                <li class="nav-item">
                  Welcome {{ Auth::user()->name }} 
                </li>
-               
+{{--                
                <li class="nav-item">
             
                   <a class="dropdown-item" href="{{ route('logout') }}"
@@ -104,7 +104,17 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-               </li>
+               </li> --}}
+
+               <li class="nav-item">
+                  <form id="logout-form" action="{{ route('custom.logout') }}" method="POST" class="d-inline">
+                      @csrf
+                      <button type="submit" class="dropdown-item btn btn-link p-0">
+                          {{ __('Logout') }}
+                      </button>
+                  </form>
+              </li>
+              
 
                 @else
 

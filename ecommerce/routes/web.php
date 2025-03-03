@@ -9,6 +9,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RazorpayPaymentController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +93,7 @@ Route::delete('/add-to-cart/{index}', [CartController::class, 'remove'])->name('
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::post('/custom-logout', [AuthenticatedSessionController::class, 'customLogout'])->name('custom.logout');
    
     Route::get('/products/{category}', [ProductController::class, 'fetchProductsByCategory']);
     

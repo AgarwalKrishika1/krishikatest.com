@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
+    protected $fillable = ['user_id', 'items'];
+
+    protected $casts = [
+        'items' => 'array', // To store and retrieve cart items as an array
+    ];
 }

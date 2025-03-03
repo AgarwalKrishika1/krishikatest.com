@@ -69,7 +69,6 @@ class LoginController extends Controller
 
             }else{
                 
-                $this->restoreCart($request);
                 return redirect('/');
 
             }
@@ -83,16 +82,5 @@ class LoginController extends Controller
         }
     }
 
-    public function restoreCart(Request $request)
-{
-    // Check if the cart cookie exists
-    if (Cookie::has('cart_logged')) {
-        // Retrieve the cart data from the cookie
-        $cart = json_decode(Cookie::get('cart_logged'), true); // Decode the cart data from JSON
-        
-        // Optionally, restore the cart to the session
-        session(['cart' => $cart]);
-    }
-}
 
 }

@@ -34,7 +34,7 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="full">
-                     <h3>You have successfully subscribed</h3>
+                     <h3>subscribed</h3>
                   </div>
                </div>
             </div>

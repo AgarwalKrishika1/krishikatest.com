@@ -392,13 +392,19 @@ a:focus {
 }
 
 .product_section .box .detail-box {
-  text-align: center;
+  /* text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
-          justify-content: space-between;
+          justify-content: space-between; */
+
+  text-align: center; 
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
 }
 
 .product_section .box .detail-box h5 {
@@ -410,6 +416,7 @@ a:focus {
   margin-top: 10px;
   color: #002c3e;
   font-weight: 600;
+  align-self: center;
 }
 
 .product_section .box:hover img {

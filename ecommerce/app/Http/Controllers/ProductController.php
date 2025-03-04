@@ -13,25 +13,55 @@ use Illuminate\Support\Facades\Cookie;
 
 class ProductController extends Controller
 {
-    public function index()
+//     public function index()
+// {
+//     $products = Products::all();
+//     return view('products.product', compact('products'));
+// }
+
+public function index(Request $request)
 {
-    $products = Products::all();
+    // Start the query builder for fetching products
+    $query = Products::query();
+    
+    // Filter by category if provided
+    if ($category = $request->get('category')) {
+        $query->where('category', $category);
+    }
+
+    // // Filter by price range if provided
+    // if ($minPrice = $request->get('minPrice')) {
+    //     $query->where('price', '>=', $minPrice);
+    // }
+    // if ($maxPrice = $request->get('maxPrice')) {
+    //     $query->where('price', '<=', $maxPrice);
+    // }
+
+    // Sorting: If a 'sort' parameter is provided
+    if ($sort = $request->get('sort')) {
+        $query->orderBy('name', $sort);
+    }
+
+    // Fetch the products based on the current query
+    $products = $query->get();
+
     return view('products.product', compact('products'));
 }
 
-public function fetchProductsByCategory($category)
-{
-    // Fetch products by the given category
-    $productsByCategory = Products::where('category', $category)->get();
-    return view('products.productByCategory', compact('productsByCategory'));
-}
 
-public function fetchSortedProducts()
-{
-    // Fetch products by the given category
-    $sortedProducts = Products::orderBy('name', 'desc')->get();
-    return view('products.sortedProduct', compact('sortedProducts'));
-}
+// public function fetchProductsByCategory($category)
+// {
+//     // Fetch products by the given category
+//     $productsByCategory = Products::where('category', $category)->get();
+//     return view('products.productByCategory', compact('productsByCategory'));
+// }
+
+// public function fetchSortedProducts()
+// {
+//     // Fetch products by the given category
+//     $sortedProducts = Products::orderBy('name', 'desc')->get();
+//     return view('products.sortedProduct', compact('sortedProducts'));
+// }
 
 
 public function fetchAndSaveProducts()

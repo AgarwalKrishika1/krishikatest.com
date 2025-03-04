@@ -64,7 +64,7 @@
              </div>
                 </div>
              </div>     
-             <div class="col-md-5">
+             {{-- <div class="col-md-5">
                 <div class="widget_menu">
                    <h3>Newsletter</h3>
                    <div class="information_f">
@@ -81,7 +81,7 @@
                       </form>
                    </div>
                 </div>
-             </div>
+             </div> --}}
              </div>
           </div>
        </div>

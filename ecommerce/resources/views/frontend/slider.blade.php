@@ -20,7 +20,7 @@
                             
                          </p>
                          <div class="btn-box">
-                            <a href="/products/jewelery" class="btn1">
+                            <a href="{{ route('products.index', ['category' => 'jewelery']) }}" class="btn1">
                             Shop Now
                             </a>
                          </div>
@@ -45,7 +45,7 @@
                            
                          </p>
                          <div class="btn-box">
-                            <a href="/products/electronics" class="btn1">
+                            <a href="{{ route('products.index', ['category' => 'electronics']) }}" class="btn1">
                             Shop Now
                             </a>
                          </div>
@@ -70,7 +70,7 @@
                             
                          </p>
                          <div class="btn-box">
-                            <a href="/products" class="btn1">
+                            <a href="{{ route('products.index') }}" class="btn1">
                             Shop Now
                             </a>
                          </div>

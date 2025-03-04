@@ -12,13 +12,11 @@ class OrderController extends Controller
 {
     public function checkout(Request $request)
     {
-        //$cartItems = Cart::where('user_id', auth()->id())->get();
+        
         $cartItems = json_decode(Cookie::get('cart', '[]'), true);
         $total = array_sum(array_map(function($item) {
             return $item['price'] * $item['quantity'];
         }, $cartItems));
-        //dd($total);
-
         
         // Create Order
         $order = Order::create([
@@ -27,16 +25,12 @@ class OrderController extends Controller
             'total_price' => $total
         ]);
 
-      // Redirect to shipping form to collect address details
+      // address details
     return redirect()->route('order.shippingForm', $order->id);
        
     }
 
-    public function viewOrder($orderId)
-    {
-        $order = Order::findOrFail($orderId);
-        return view('order.view', compact('order'));
-    }
+   
     public function saveShipping(Request $request)
     {
         $request->validate([

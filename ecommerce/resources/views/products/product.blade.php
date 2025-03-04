@@ -46,19 +46,32 @@
      <section class="product_section">
    
    <div class="container">
-      <style>
-         
-         </style>
+     
          <br>
          <div class="dropdown">
-           <button class="dropbtn">Filter by Categories</button>
+            
+           <button class="dropbtn">Filter by Categories
+            <i class="fa fa-caret-down"></i>
+           </button>
            <div class="dropdown-content">
-             <a href="/products/jewelery">Jewelery</a>
-             <a href="/products/electronics">Electronics</a>
-             <a href="/products/men's clothing">Men's clothing</a>
-             <a href="/products/women's clothing">Women's clothing</a>
+            
+             <a href="{{ route('products.index', ['category' => 'jewelery']) }}">Jewelery</a>
+             <a href="{{ route('products.index', ['category' => 'electronics']) }}">Electronics</a>
+             <a href="{{ route('products.index', ['category' => "men's clothing"]) }}">Men's clothing</a>
+             <a href="{{ route('products.index', ['category' => "women's clothing"]) }}">Women's clothing</a>
            </div>
          </div>
+
+         <div class="dropdown" >
+            
+            <button class="dropbtn">Sort
+             <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+               <a href="{{ route('products.index', ['sort' => 'asc']) }}">Name (A-Z)</a>
+               <a href="{{ route('products.index', ['sort' => 'desc']) }}">Name (Z-A)</a>
+            </div>
+          </div>
       <div class="row">
          
          @foreach($products as $product)
@@ -90,10 +103,11 @@
          @endforeach
       </div>
       <div class="btn-box">
-         <a href="">
+         <a href="{{ route('products.index') }}">
             View All products
          </a>
       </div>
+      <br>
    </div>
 </section>
       <!-- end product section -->

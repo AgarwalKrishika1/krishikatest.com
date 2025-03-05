@@ -24,10 +24,6 @@ use App\Http\Controllers\SubscriptionController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.master');
-});
-
 Route::get('/subscribed', function () {
     return view('subscribed');
 });
@@ -52,9 +48,6 @@ Route::get('contact', function () {
 
 Route::get('/a', [TemplateController::class,'index'])->name('templateHome');
 
-Route::get('/dashboard', function () {
-    return view('frontend.home');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -64,7 +57,7 @@ require __DIR__.'/auth.php';
 Auth::routes(['verify' => true]);
 
 // normal user
-Route::middleware(['auth', 'user-access:user'])->group(function () {
+Route::middleware(['auth', 'user-access:user', 'verified'])->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -139,3 +132,12 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+
+Route::get('/', function () {
+    return view('frontend.master');
+})->name('home');
+
+
+
+Route::get('/subscribe', [SubscriptionController::class, 'showForm'])->name('subscribe');
+Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe.submit');

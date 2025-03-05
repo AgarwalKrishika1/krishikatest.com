@@ -48,7 +48,18 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+       
+    // Check if the user's email is verified
+    if ($user->hasVerifiedEmail()) {
+        // Redirect to the home page if the email is verified
+        dd('verified');
+        return redirect()->route('home');
+    } else {
+        // Log the user out and redirect them with a message to the home page
+        Auth::logout();
 
-        return redirect(RouteServiceProvider::HOME);
+        // Redirect to home with a status message
+        return redirect()->route('home')->with('status', 'Please verify your email address.');
+    }
     }
 }

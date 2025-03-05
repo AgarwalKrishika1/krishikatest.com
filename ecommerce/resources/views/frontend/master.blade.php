@@ -22,6 +22,25 @@
       <link href="/home/css/responsive.css" rel="stylesheet" />
    </head>
    <body>
+
+            @if(session('error'))
+         <div class="alert alert-danger">
+            {{ session('error') }}
+         </div>
+
+         <!-- Register Button -->
+         <form action="{{ route('register') }}" method="get">
+            <button type="submit" class="btn btn-primary">Register</button>
+         </form>
+      @endif
+
+
+      @if(session('error_verify'))
+      <div class="alert alert-danger">
+         {{ session('error_verify') }}
+      </div>
+   @endif
+
       <div class="hero_area">
          <!-- header section strats -->
          @include('frontend.header');

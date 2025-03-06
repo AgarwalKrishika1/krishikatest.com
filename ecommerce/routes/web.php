@@ -108,6 +108,15 @@ Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->na
 
 Route::get('/fetch-products', [ProductController::class, 'fetchAndSaveProducts']);
 
+Route::get('/', function () {
+    return view('frontend.master');
+})->name('home');
+
+
+
+
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 
 // email verification
@@ -117,29 +126,19 @@ Route::get('/email/verify', function () {
 })->middleware('auth')->name('verification.notice');
 
 
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    
     $request->fulfill();
-
-    return redirect('/');
+    session()->flash('message', 'Your email has been successfully verified! Please log in.');
+    return redirect('login');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 
-use Illuminate\Http\Request;
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-
-Route::get('/', function () {
-    return view('frontend.master');
-})->name('home');
-
-
-
-// Route::get('/subscribe', [SubscriptionController::class, 'showForm'])->name('subscribe');
-// Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe.submit');

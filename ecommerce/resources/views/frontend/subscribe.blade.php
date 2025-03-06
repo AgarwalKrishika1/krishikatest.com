@@ -1,5 +1,5 @@
 <!-- resources/views/subscribe.blade.php -->
-@if (Auth::check())
+@if (Auth::check() && auth()->user()->email_verified_at)
 
 <section class="subscribe_section">
     <div class="container-fluid">
@@ -35,11 +35,7 @@
                         <!-- Display validation errors (if any) -->
                         @if ($errors->any())
                             <div class="alert alert-danger">
-                                <ul>
-                                    {{-- @foreach ($errors->all() as $error) --}}
-                                        <li>You need to register first</li>
-                                    {{-- @endforeach --}}
-                                </ul>
+                                You need to register first
                             </div>
                           
                         @endif

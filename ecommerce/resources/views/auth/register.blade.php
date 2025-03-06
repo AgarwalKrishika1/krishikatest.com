@@ -8,9 +8,14 @@
     <title>Register</title>
     <link rel="stylesheet" type="text/css" href="/auth/styles.css" />
 </head>
-
 <body>
     <div class="container">
+        <div> 
+            @if(session('status'))
+            <div class="alert alert-danger">
+                {{ session('status') }}
+            </div>
+            @endif
         <h2>Register</h2>
 
         <form action="{{ route('register') }}" method="POST">

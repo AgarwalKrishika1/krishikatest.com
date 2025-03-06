@@ -41,12 +41,21 @@
                
                       @auth
                       <li><a href="/">Account</a></li>
-                      <li><a href="/logout">Checkout</a></li>
+                      <li>
+                      
+                        <form id="logout-form" action="{{ route('custom.logout') }}" method="POST" class="d-inline">
+                           @csrf
+                           <button type="submit" style="background: none; border: none; color: black; padding: 0; outline: none; box-shadow: none;">
+                              {{ __('Logout') }}
+                          </button>
+                          
+                       </form>
+                       
+                     </li>
                       <li><a href="/products">Shopping</a></li>
 
                        @else
                        <li><a href="/">Account</a></li>
-                       <li><a href="/checkout">Checkout</a></li>
                        <li><a href="/login">Login</a></li>
                       <li><a href="/register">Register</a></li>
                        <li><a href="/products">Shopping</a></li>

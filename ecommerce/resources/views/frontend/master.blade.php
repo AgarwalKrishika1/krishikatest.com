@@ -23,6 +23,13 @@
       </div>
    @endif
 
+
+   @if(session('status'))
+   <div class="alert alert-danger">
+      {{ session('status') }}
+   </div>
+@endif
+
       <div class="hero_area">
          <!-- header section strats -->
          @include('frontend.header');

@@ -28,6 +28,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
+require __DIR__.'/auth.php';
+
+//this raise a issue at registration if user no verified
+// Auth::routes(['verify' => true]);
+
+Auth::routes(['verify' => true]);
+
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
@@ -35,26 +42,9 @@ Route::get('register', [RegisterController::class, 'showRegistrationForm'])->nam
 Route::post('register', [RegisterController::class, 'register']);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 Route::get('welcome', function () {
     return view('welcome');
 })->name('welcome');
-
-
-Route::get('/subscribed', function () {
-    return view('subscribed');
-});
 
 
 Route::get('about', function () {
@@ -76,13 +66,6 @@ Route::get('contact', function () {
 
 Route::get('/a', [TemplateController::class,'index'])->name('templateHome');
 
-
-require __DIR__.'/auth.php';
-
-//this raise a issue at registration if user no verified
-// Auth::routes(['verify' => true]);
-
-Auth::routes(['verify' => true]);
 
 // normal user
 Route::middleware(['auth', 'user-access:user'])->group(function () {
@@ -115,7 +98,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('checkout', [OrderController::class, 'checkout'])->name('order.checkout');
     
-   Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show')->middleware('verified');
+   Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show');
+                // ->middleware('verified');
 
 
 Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
@@ -157,5 +141,5 @@ Route::get('/', function () {
 
 
 
-Route::get('/subscribe', [SubscriptionController::class, 'showForm'])->name('subscribe');
-Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe.submit');
+// Route::get('/subscribe', [SubscriptionController::class, 'showForm'])->name('subscribe');
+// Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe.submit');

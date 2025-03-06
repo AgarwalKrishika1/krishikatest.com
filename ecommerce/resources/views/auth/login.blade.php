@@ -12,8 +12,17 @@
 
 <body>
     <div class="container">
-        <h2>Login</h2>
+        <div>
 
+            <!-- Display validation errors (if any) -->
+           
+   @if(session('status'))
+   <div class="alert alert-danger">
+      {{ session('status') }}
+   </div>
+@endif
+            </div>
+        <h2>Login</h2>
     <form action="{{ route('login') }}" method="POST">
         @csrf
         <div class="form-group">

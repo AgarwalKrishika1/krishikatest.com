@@ -72,7 +72,7 @@
 //     }
 // }
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -100,9 +100,23 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+       
+        event(new Registered($user));
 
         Auth::login($user);
 
+            
+    // Check if the user's email is verified
+    if ($user->hasVerifiedEmail()) {
+        // Redirect to the home page if the email is verified
+       
         return redirect()->route('home');
+    } else {
+        // Log the user out and redirect them with a message to the home page
+        Auth::logout();
+
+        // Redirect to home with a status message
+        return redirect()->route('register')->with('status', 'Please verify your email address.');
+    }
     }
 }

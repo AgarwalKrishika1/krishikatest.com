@@ -1,1 +1,1 @@
-@extends('adminlte::auth.passwords.email')
+password email

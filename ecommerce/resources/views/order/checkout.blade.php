@@ -2,7 +2,7 @@
 
 @extends('layout')
 
-@extends('adminlte::page')
+
 
 
 @section('title', 'Dashboard')
@@ -35,6 +35,6 @@
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+    <script> console.log("Hi, !"); </script>
 @stop
 

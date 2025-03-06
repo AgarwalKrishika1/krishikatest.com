@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -23,6 +23,34 @@ use App\Http\Controllers\SubscriptionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('welcome', function () {
+    return view('welcome');
+})->name('welcome');
+
 
 Route::get('/subscribed', function () {
     return view('subscribed');
@@ -57,9 +85,9 @@ require __DIR__.'/auth.php';
 Auth::routes(['verify' => true]);
 
 // normal user
-Route::middleware(['auth', 'user-access:user', 'verified'])->group(function () {
+Route::middleware(['auth', 'user-access:user'])->group(function () {
 
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('verified');
 
 });
 
@@ -70,17 +98,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 });
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-// Route::group(['middleware' => ['auth','admin']], function () {
-//     Route::get('/dashboard', function () {
-//         return "ADMIN";
-//     });
-// });
-
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-
-
 
 Route::middleware(['auth'])->group(function () {
 

@@ -1,1 +1,1 @@
-@extends('adminlte::auth.verify')
+verify

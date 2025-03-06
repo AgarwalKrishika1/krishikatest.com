@@ -42,22 +42,3 @@
             </form>
         </div>
     </x-auth-card>
-{{-- </x-guest-layout> --}}
-
-<!-- resources/views/auth/verify-email.blade.php -->
-
-{{-- @extends('adminlte::page')
-
-@section('title', 'Email Verification')
-
-@section('content_header')
-    <h1>Email Verification</h1>
-@endsection
-
-@section('content')
-    <div class="alert alert-info">
-        Please check your email to verify your account. You must verify your email before logging in.
-    </div>
-    <p>If you did not receive the email, <a href="{{ route('verification.resend') }}">click here to request another one</a>.</p>
-@endsection
- --}}

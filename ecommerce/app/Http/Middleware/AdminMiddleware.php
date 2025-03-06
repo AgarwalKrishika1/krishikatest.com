@@ -23,7 +23,7 @@ class AdminMiddleware
             }
         
             else{
-                return redirect('/');
+                return redirect()->route('home');
             }
           
         }

@@ -10,7 +10,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RazorpayPaymentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\SubscriptionController;
+
 
 
 /*
@@ -142,3 +142,20 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+
+// routes/web.php
+
+use App\Http\Controllers\AdminController;
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('home', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('product/{id}/edit', [AdminController::class, 'editProduct'])->name('admin.edit');
+    Route::put('product/{id}', [AdminController::class, 'updateProduct'])->name('admin.update');
+    Route::delete('product/{id}', [AdminController::class, 'deleteProduct'])->name('admin.delete');
+
+    Route::get('products', function () {
+        return view('admin.product');
+    });
+});

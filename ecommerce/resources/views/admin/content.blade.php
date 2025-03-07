@@ -3,65 +3,13 @@
         </div>
         <section class="no-padding-top no-padding-bottom">
           <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-3 col-sm-6">
-                <div class="statistic-block block">
-                  <div class="progress-details d-flex align-items-end justify-content-between">
-                    <div class="title">
-                      <div class="icon"><i class="icon-user-1"></i></div><strong>New Clients</strong>
-                    </div>
-                    <div class="number dashtext-1">27</div>
-                  </div>
-                  <div class="progress progress-template">
-                    <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="statistic-block block">
-                  <div class="progress-details d-flex align-items-end justify-content-between">
-                    <div class="title">
-                      <div class="icon"><i class="icon-contract"></i></div><strong>New Projects</strong>
-                    </div>
-                    <div class="number dashtext-2">375</div>
-                  </div>
-                  <div class="progress progress-template">
-                    <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-2"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="statistic-block block">
-                  <div class="progress-details d-flex align-items-end justify-content-between">
-                    <div class="title">
-                      <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>New Invoices</strong>
-                    </div>
-                    <div class="number dashtext-3">140</div>
-                  </div>
-                  <div class="progress progress-template">
-                    <div role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="statistic-block block">
-                  <div class="progress-details d-flex align-items-end justify-content-between">
-                    <div class="title">
-                      <div class="icon"><i class="icon-writing-whiteboard"></i></div><strong>All Projects</strong>
-                    </div>
-                    <div class="number dashtext-4">41</div>
-                  </div>
-                  <div class="progress progress-template">
-                    <div role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-4"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </section>
         <section class="no-padding-bottom">
           <div class="container-fluid">
-            <div class="row">
+            {{-- bar chart --}}
+            {{-- <div class="row">
               <div class="col-lg-4">
                 <div class="bar-chart block no-margin-bottom">
                   <canvas id="barChartExample1"></canvas>
@@ -75,12 +23,18 @@
                   <canvas id="lineCahrt"></canvas>
                 </div>
               </div>
-            </div>
+            </div> --}}
+            
+            @include('admin.product')
+
+
+            @include('admin.users')
           </div>
         </section>
         <section class="no-padding-bottom">
           <div class="container-fluid">
-            <div class="row">
+            {{-- 2nd chart --}}
+            {{-- <div class="row">
               <div class="col-lg-6">
                 <div class="stats-2-block block d-flex">
                   <div class="stats-2 d-flex">
@@ -121,12 +75,13 @@
                   <canvas id="lineChart1"></canvas>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
         </section>
         <section class="no-padding-bottom">
           <div class="container-fluid">
-            <div class="row">
+            {{-- user data --}}
+            {{-- <div class="row">
               <div class="col-lg-4">
                 <div class="user-block block text-center">
                   <div class="avatar"><img src="/admincss/img/avatar-1.jpg" alt="..." class="img-fluid">
@@ -169,8 +124,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="public-user-block block">
+            </div> --}}
+            {{-- <div class="public-user-block block">
               <div class="row d-flex align-items-center">                   
                 <div class="col-lg-4 d-flex align-items-center">
                   <div class="order">4th</div>
@@ -187,8 +142,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="public-user-block block">
+            </div> --}}
+            {{-- <div class="public-user-block block">
               <div class="row d-flex align-items-center">                   
                 <div class="col-lg-4 d-flex align-items-center">
                   <div class="order">5th</div>
@@ -223,12 +178,13 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
         </section>
         <section class="margin-bottom-sm">
           <div class="container-fluid">
-            <div class="row d-flex align-items-stretch">
+            {{-- sales chart --}}
+            {{-- <div class="row d-flex align-items-stretch">
               <div class="col-lg-4">
                 <div class="stats-with-chart-1 block">
                   <div class="title"> <strong class="d-block">Sales Difference</strong><span class="d-block">Lorem ipsum dolor sit</span></div>
@@ -274,12 +230,13 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
         </section>
         <section class="no-padding-bottom">
           <div class="container-fluid">
-            <div class="row">
+            {{-- to do and new message --}}
+            {{-- <div class="row">
               <div class="col-lg-6">
                 <div class="checklist-block block">
                   <div class="title"><strong>To Do List</strong></div>
@@ -337,12 +294,13 @@
                       <div class="content">   <strong class="d-block">Nader Magdy</strong><span class="d-block">lorem ipsum dolor sit amit</span><small class="date d-block">9:47pm</small></div></a></div>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
         </section>
         <section>
           <div class="container-fluid">
-            <div class="row">
+            {{-- credit sales --}}
+            {{-- <div class="row">
               <div class="col-lg-4">
                 <div class="stats-with-chart-2 block">
                   <div class="title"><strong class="d-block">Credit Sales</strong><span class="d-block">Lorem ipsum dolor sit</span></div>
@@ -370,7 +328,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
         </section>
         <footer class="footer">

@@ -108,13 +108,15 @@ class LoginController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
+
+            if(!$user->email_verified_at){
+                return redirect()->route('login')->with('status', 'Please verify your email before logging in.');
+            }
             if($user->type == 'admin'){
                 return redirect()->route('admin.index');
             }
-            if($user->email_verified_at){
-                return redirect()->route('home');
-            }
-            return redirect()->route('login')->with('status', 'Please check the mail and verify your user first');
+           
+            return redirect()->route('home');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials.']);

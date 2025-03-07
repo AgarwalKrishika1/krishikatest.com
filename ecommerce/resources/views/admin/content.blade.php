@@ -29,6 +29,9 @@
 
 
             @include('admin.users')
+
+
+            @include('admin.sale_slider')
           </div>
         </section>
         <section class="no-padding-bottom">
@@ -80,6 +83,8 @@
         </section>
         <section class="no-padding-bottom">
           <div class="container-fluid">
+
+           
             {{-- user data --}}
             {{-- <div class="row">
               <div class="col-lg-4">

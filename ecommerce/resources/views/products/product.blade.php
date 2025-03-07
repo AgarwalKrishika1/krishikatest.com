@@ -95,7 +95,7 @@
                      {{ $product->name }}
                   </h5>
                   <h6>
-                     ${{ $product->price }}
+                     Rs {{ $product->price }}
                   </h6>
                </div>
             </div>

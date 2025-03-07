@@ -12,7 +12,8 @@
             <li class="active"><a href="home"> <i class="icon-home"></i>Home </a></li>
             <li><a href="#products"> <i class="icon-grid"></i>Products </a></li>
             <li><a href="#users"> <i class="fa fa-bar-chart"></i>Users </a></li>
-            <li><a href="orders"> <i class="icon-padnote"></i>Orders </a></li>
+            <li><a href="#orders"> <i class="icon-padnote"></i>Orders </a></li>
+            <li><a href="#sale_slider"> <i class="icon-padnote"></i>Sales </a></li>
             {{-- <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Example dropdown </a>
               <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="#">Page</a></li>

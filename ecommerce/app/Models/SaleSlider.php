@@ -9,5 +9,5 @@ class SaleSlider extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['discount', 'category'];
+    protected $fillable = ['discount', 'category', 'link'];
 }

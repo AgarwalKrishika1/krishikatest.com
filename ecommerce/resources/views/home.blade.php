@@ -23,7 +23,7 @@
  
  <body>
   
-    @include('frontend.master')
+    @include('frontend.master', ['sales' => $sales])
      <!-- jQery -->
      <script src="/home/js/jquery-3.4.1.min.js"></script>
      <!-- popper js -->

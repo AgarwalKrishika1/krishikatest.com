@@ -17,6 +17,7 @@ class CreateSaleSlidersTable extends Migration
             $table->id();
             $table->string('discount');  // e.g., '20% Off'
             $table->string('category');  // e.g., 'jewelery'
+            $table->string('link');
             $table->timestamps();
         });
     }

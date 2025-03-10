@@ -162,8 +162,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     // Route::resource('sliders', SaleSliderController::class);
 
     //slider
-    Route::get('sliders', [SaleSliderController::class, 'index'])->name('admin.sliders.index');
-    Route::get('sliders/create', [SaleSliderController::class, 'create'])->name('admin.sliders.create');
+    Route::get('home', [SaleSliderController::class, 'index'])->name('admin.sliders.index');
+   Route::get('sliders/create', [SaleSliderController::class, 'create'])->name('admin.sliders.create');
     Route::post('sliders', [SaleSliderController::class, 'store'])->name('admin.sliders.store');
     Route::get('sliders/{saleSlider}/edit', [SaleSliderController::class, 'edit'])->name('admin.sliders.edit');
     Route::put('sliders/{saleSlider}', [SaleSliderController::class, 'update'])->name('admin.sliders.update');

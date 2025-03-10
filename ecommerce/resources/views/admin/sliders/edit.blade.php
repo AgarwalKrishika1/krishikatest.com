@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             <label for="link">Link</label>
-            <input type="url" class="form-control" id="link" name="link" value="{{ $saleSlider->link }}" required>
+            <input type="url" class="form-control" id="link" name="link" value="https://{{ $saleSlider->link }}" required>
         </div>
 
         <button type="submit" class="btn btn-success mt-3">Update Slider</button>

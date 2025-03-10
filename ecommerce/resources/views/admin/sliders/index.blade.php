@@ -17,7 +17,7 @@
                     <td>{{ $slider->link }}</td>
                     <td>
                         <a href="{{ route('admin.sliders.edit', $slider) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('admin.sliders.destroy', $slider) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('admin.sliders.delete', $slider) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>

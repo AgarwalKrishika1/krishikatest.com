@@ -110,7 +110,7 @@ class LoginController extends Controller
             $user = Auth::user();
 
              if($user->type == 'admin'){
-                return redirect()->route('admin.index');
+                return redirect()->route('home');
             }
            
             if(!$user->email_verified_at){

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SaleSlider;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.master');
+        $sales = SaleSlider::all();  // Get active sales
+        dd($sales);
+        return view('frontend.master',compact('sales'));
     }
 
     /**

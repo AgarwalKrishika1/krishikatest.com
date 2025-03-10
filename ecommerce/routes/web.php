@@ -134,7 +134,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     
     $request->fulfill();
 
-    return redirect('welcome');
+    return redirect('login')->with('status', 'You are verified, please login to continue');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 

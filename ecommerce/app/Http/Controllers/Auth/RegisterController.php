@@ -112,11 +112,9 @@ class RegisterController extends Controller
        
         return redirect()->route('home');
     } else {
-        // Log the user out and redirect them with a message to the home page
-        Auth::logout();
-
+       
         // Redirect to home with a status message
-        return redirect()->route('register')->with('status', 'An emaail is sent to verify, please verify');
+        return redirect()->route('register')->with('status', 'An email is sent to verify, please verify');
     }
     }
 }

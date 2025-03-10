@@ -73,7 +73,7 @@ Route::get('/a', [TemplateController::class,'index'])->name('templateHome');
 // normal user
 Route::middleware(['auth', 'user-access:user'])->group(function () {
 
-    Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('verified');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
 });
 
@@ -133,8 +133,8 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     
     $request->fulfill();
-    session()->flash('message', 'Your email has been successfully verified! Please log in.');
-    return redirect('login')->with('email_verified_at', now());
+
+    return redirect('welcome');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 

@@ -1,8 +1,9 @@
-<section class="slider_section ">
-    <div class="slider_bg_box">
-       <img src="images/slider-bg.jpg" alt="">
-    </div>
+{{-- <section class="slider_section ">
+   
     <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+      <div class="slider_bg_box">
+         <img src="/images/slider-bg.jpg" alt="" >
+       </div>
        <div class="carousel-inner">
           <div class="carousel-item active">
              <div class="container ">
@@ -19,8 +20,9 @@
                          <p>
                             
                          </p>
-                         <div class="btn-box">
-                            <a href="{{ route('products.index', ['category' => 'jewelery']) }}" class="btn1">
+                         <div class="btn-box"> --}}
+                            {{-- <a href="{{ route('products.index', ['category' => 'jewelery']) }}" class="btn1"> --}}
+                              {{-- <a href="/products?category=jewelery" class="btn1">
                             Shop Now
                             </a>
                          </div>
@@ -45,7 +47,7 @@
                            
                          </p>
                          <div class="btn-box">
-                            <a href="{{ route('products.index', ['category' => 'electronics']) }}" class="btn1">
+                            <a href="/products?category=electronics" class="btn1">
                             Shop Now
                             </a>
                          </div>
@@ -70,7 +72,7 @@
                             
                          </p>
                          <div class="btn-box">
-                            <a href="{{ route('products.index') }}" class="btn1">
+                            <a href="/products" class="btn1">
                             Shop Now
                             </a>
                          </div>
@@ -88,4 +90,40 @@
           </ol>
        </div>
     </div>
- </section>
+ </section> --}}
+
+ <section class="slider">
+   <h2> slider </h2>
+   <table class="table">
+   <thead>
+   <tr>
+      <th>discount</th>
+      <th>category</th>
+      <th> link </th>
+      <th>Actions</th>
+   </tr>
+   </thead>
+   <tbody>
+       @php
+       use App\Models\SaleSlider;
+       $sliders = SaleSlider::all();
+       @endphp
+   @foreach($sliders as $slider)
+      <tr>
+          <td>{{ $slider->discount }}</td>
+          <td>{{ $slider->category }}</td>
+          <td>{{ $slider->link }}</td>
+          <td></td>
+          <td>
+              <a href="{{ route('admin.sliders.edit', $slider->id) }}" class="btn btn-warning">Edit</a>
+              <form action="{{ route('admin.sliders.delete', $slider->id) }}" method="POST" style="display:inline;">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+          </td>
+      </tr>
+   @endforeach
+   </tbody>
+   </table>
+   </section>

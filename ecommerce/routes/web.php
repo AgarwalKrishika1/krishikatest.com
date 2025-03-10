@@ -167,7 +167,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('sliders', [SaleSliderController::class, 'store'])->name('admin.sliders.store');
     Route::get('sliders/{saleSlider}/edit', [SaleSliderController::class, 'edit'])->name('admin.sliders.edit');
     Route::put('sliders/{saleSlider}', [SaleSliderController::class, 'update'])->name('admin.sliders.update');
-    Route::delete('sliders/{saleSlider}', [SaleSliderController::class, 'destroy'])->name('admin.sliders.destroy');
+    Route::delete('sliders/{saleSlider}', [SaleSliderController::class, 'destroy'])->name('admin.sliders.delete');
 
 
     Route::get('products', function () {

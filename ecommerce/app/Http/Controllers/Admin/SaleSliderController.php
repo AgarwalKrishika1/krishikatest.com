@@ -24,7 +24,7 @@ class SaleSliderController extends Controller
         $request->validate([
             'discount' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'link' => 'required|url',
+            // 'link' => 'required|url',
         ]);
 
         SaleSlider::create($request->all());
@@ -42,7 +42,7 @@ class SaleSliderController extends Controller
         $request->validate([
             'discount' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'link' => 'required|url',
+            // 'link' => 'required|url',
         ]);
 
         $saleSlider->update($request->all());

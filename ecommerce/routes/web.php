@@ -127,7 +127,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 // admin
 
 Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('home', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('', [AdminController::class, 'index'])->name('admin.index');
     Route::get('product/{id}/edit', [AdminController::class, 'editProduct'])->name('admin.edit');
     Route::put('product/{id}', [AdminController::class, 'updateProduct'])->name('admin.update');
     Route::delete('product/{id}', [AdminController::class, 'deleteProduct'])->name('admin.delete');

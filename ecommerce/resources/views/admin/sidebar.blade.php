@@ -9,7 +9,7 @@
     </div>
     <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
     <ul class="list-unstyled">
-            <li class="active"><a href="home"> <i class="icon-home"></i>Home </a></li>
+            <li class="active"><a href=""> <i class="icon-home"></i>Home </a></li>
             <li><a href="#products"> <i class="icon-grid"></i>Products </a></li>
             <li><a href="#users"> <i class="fa fa-bar-chart"></i>Users </a></li>
             <li><a href="#orders"> <i class="icon-padnote"></i>Orders </a></li>

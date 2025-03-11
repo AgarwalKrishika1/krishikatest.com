@@ -36,7 +36,7 @@
          <!-- end header section -->
 
          <!-- slider section -->
-         @include('frontend.slider');
+         @include('frontend.slider', ['sales' => $sales]);
          <!-- end slider section -->
       </div>
 

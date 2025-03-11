@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SaleSlider;
 use Illuminate\View\View;
+use App\Models\SaleSlider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,23 +14,40 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    // public function index()
+    // {
+    //     if (Auth::check() && Auth::user()->type == 'admin') {
+    //         return view('adminHome');
+    //     }
+    //     elseif(!Auth::check()){
+    //         $sales = SaleSlider::all();  // Get active sales
+       
+    //         return view('frontend.master',compact('sales'));
+    //     }
+    //     return view('frontend.master',compact('sales'));
+    // }   
+
+
     public function index()
     {
-        $sales = SaleSlider::all();  // Get active sales
-        dd($sales);
-        return view('frontend.master',compact('sales'));
+        // Show the master page by default
+        echo Auth::check();
+        if (Auth::check() && Auth::user()->type == 'admin') {
+            return view('adminHome');
+        }
+        $sales = SaleSlider::all();
+        return view('frontend.master', compact('sales'));
     }
-
     /**
 
      * Show the application dashboard.

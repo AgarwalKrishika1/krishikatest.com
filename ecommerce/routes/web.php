@@ -36,6 +36,9 @@ require __DIR__.'/auth.php';
 //this raise a issue at registration if user no verified
 // Auth::routes(['verify' => true]);
 
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Auth::routes(['verify' => true]);
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -71,18 +74,18 @@ Route::get('contact', function () {
 
 
 // normal user
-Route::middleware(['auth', 'user-access:user'])->group(function () {
+// Route::middleware(['auth', 'user-access:user'])->group(function () {
 
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+//     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-});
+// });
 
-//admin user
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
+// //admin user
+// Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
-    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+//     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
 
-});
+// });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
@@ -97,7 +100,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order/{orderId}/shipping', [OrderController::class, 'shippingForm'])->name('order.shippingForm');
     Route::post('/order/save-shipping', [OrderController::class, 'saveShipping'])->name('order.saveShipping');
 
-    Route::post('checkout', [OrderController::class, 'checkout'])->name('order.checkout');
+    Route::post('checkout', [OrderController::class, 'checkout'])->name('order.checkout')->middleware('verified');
     
    Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show')
                 ->middleware('verified');
@@ -111,13 +114,13 @@ Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->na
 Route::delete('/add-to-cart/{index}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/fetch-products', [ProductController::class, 'fetchAndSaveProducts']);
 
-Route::get('/', function () {
+// Route::get('/', function () {
    
-    if(Auth::check() && Auth::user()->type == 'admin'){
-        return view('adminHome');
-    }
-    return view('frontend.master');
-})->name('home');
+//     if(Auth::check() && Auth::user()->type == 'admin'){
+//         return view('adminHome');
+//     }
+//     return view('frontend.master');
+// })->name('home');
 
 
 

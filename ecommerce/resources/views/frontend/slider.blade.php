@@ -5,11 +5,14 @@
             <img src="/images/slider-bg.jpg" alt="">
         </div>
         <div class="carousel-inner">
-
+{{-- 
             @php
        use App\Models\SaleSlider;
        $sales = SaleSlider::all();
-       @endphp
+     
+       @endphp --}}
+
+
             @foreach($sales as $index => $sale)
                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                     <div class="container">
@@ -26,11 +29,11 @@
                                     <p></p>
                                     <div class="btn-box">
                                         @if ($sale->category == 'all')
-                                        <a href="/products" class="btn1">
+                                        <a href="{{ url()->current() . '/products' }}" class="btn1">
                                             Shop Now
                                         </a>
                                        @else
-                                        <a href="/products?category={{ $sale->category }}" class="btn1">
+                                        <a href="{{ url()->current() . '/products?category=' . $sale->category }}" class="btn1">
                                             Shop Now
                                         </a>
                                         @endif

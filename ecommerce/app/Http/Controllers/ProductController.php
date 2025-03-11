@@ -39,7 +39,7 @@ public function index(Request $request)
 
     // Sorting: If a 'sort' parameter is provided
     if ($sort = $request->get('sort')) {
-        $query->orderBy('name', $sort);
+        $query->orderBy('price', $sort);
     }
 
     // Fetch the products based on the current query

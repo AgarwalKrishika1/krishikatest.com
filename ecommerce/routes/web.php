@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\SaleSliderController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\RazorpayPaymentController;
-use App\Http\Controllers\TemplateController;
+// use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -67,7 +67,7 @@ Route::get('contact', function () {
     return view('contact');
 });
 
-Route::get('/a', [TemplateController::class,'index'])->name('templateHome');
+// Route::get('/a', [TemplateController::class,'index'])->name('templateHome');
 
 
 // normal user
@@ -90,9 +90,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/custom-logout', [AuthenticatedSessionController::class, 'customLogout'])->name('custom.logout');
    
-    Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('products.addToCart');
-    Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->name('products.addToCartView');
-    Route::delete('/add-to-cart/{index}', [CartController::class, 'remove'])->name('cart.remove');
+   
 
     
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
@@ -101,18 +99,20 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('checkout', [OrderController::class, 'checkout'])->name('order.checkout');
     
-   Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show');
-                // ->middleware('verified');
+   Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show')
+                ->middleware('verified');
 
 
 Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
 });
 
-
+Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('products.addToCart');
+Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->name('products.addToCartView');
+Route::delete('/add-to-cart/{index}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/fetch-products', [ProductController::class, 'fetchAndSaveProducts']);
 
 Route::get('/', function () {
-    // dd(Auth::user());
+   
     if(Auth::check() && Auth::user()->type == 'admin'){
         return view('adminHome');
     }
@@ -147,7 +147,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 
 
-// routes/web.php
+// admin
 
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('home', [AdminController::class, 'index'])->name('admin.index');

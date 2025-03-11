@@ -1,25 +1,17 @@
+
 <!DOCTYPE html>
 <html>
    <head>
-      <!-- Basic -->
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <!-- Mobile Metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <!-- Site Metas -->
-      <meta name="keywords" content="" />
-      <meta name="description" content="" />
-      <meta name="author" content="" />
-      <link rel="shortcut icon" href="images/favicon.png" type="">
-      <title>E-commerce website</title>
-      <!-- bootstrap core css -->
-      <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
-      <!-- font awesome style -->
-      <link href="home/css/font-awesome.min.css" rel="stylesheet" />
-      <!-- Custom styles for this template -->
-      <link href="home/css/style.css" rel="stylesheet" />
-      <!-- responsive style -->
-      <link href="home/css/responsive.css" rel="stylesheet" />
+      @include('frontend.css')
+
+      <!-- jQery -->
+      <script src="/home/js/jquery-3.4.1.min.js"></script>
+      <!-- popper js -->
+      <script src="/home/js/popper.min.js"></script>
+      <!-- bootstrap js -->
+      <script src="/home/js/bootstrap.js"></script>
+      <!-- custom js -->
+      <script src="/home/js/custom.js"></script>
    </head>
    <body class="sub_page">
       <div class="hero_area">
@@ -42,20 +34,26 @@
       <!-- end inner page section -->
       <!-- why section -->
       <section class="why_section layout_padding">
-         <div class="container">
          
+
+         <div class="container">
             <div class="row">
                <div class="col-lg-8 offset-lg-2">
                   <div class="full">
-                     <form action="{{route('products.index')}}">
+                     <!-- Error message section -->
+                           <div id="errorMessages" class="alert alert-danger"  style="display: none;" >
+                              <ul id="errorList"></ul>
+                        </div>
+                     <form id="contactForm" action="{{route('products.index')}}"  novalidate >
                         <fieldset>
-                           <input type="text" placeholder="Enter your full name" name="name" required />
-                           <input type="email" placeholder="Enter your email address" name="email" required />
-                           <input type="text" placeholder="Enter subject" name="subject" required />
-                           <textarea placeholder="Enter your message" required></textarea>
+                           <input type="text" id="name" placeholder="Enter your full name" name="name" required />
+                           <input type="email" id="email" placeholder="Enter your email address" name="email" required />
+                           <input type="text" id="subject" placeholder="Enter subject" name="subject" required />
+                           <textarea id="message" placeholder="Enter your message" required></textarea>
                            <input type="submit" value="Submit" />
                         </fieldset>
                      </form>
+                     
                   </div>
                </div>
             </div>
@@ -68,13 +66,65 @@
       <!-- footer section -->
       @include('frontend.footer')
       <!-- footer section -->
-    <!-- jQery -->
-    <script src="home/js/jquery-3.4.1.min.js"></script>
-    <!-- popper js -->
-    <script src="home/js/popper.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="home/js/bootstrap.js"></script>
-    <!-- custom js -->
-    <script src="home/js/custom.js"></script>
+
+      <script>
+         $(document).ready(function() {
+             // When form is submitted
+             $("#contactForm").on("submit", function(event) {
+                 let isValid = true;
+                 let errorMessages = [];
+
+                 // Clear previous error messages
+                 $("#errorList").empty(); // Clear the list of errors
+                 $("#errorMessages").hide(); // Hide error section initially
+
+                 // Validate Name (not empty)
+                 if ($("#name").val().trim() === "") {
+                     errorMessages.push("Please enter your name.");
+                     isValid = false;
+                 }
+
+                 // Validate Email (not empty and valid email format)
+                 let email = $("#email").val().trim();
+                 if (email === "") {
+                     errorMessages.push("Please enter your email.");
+                     isValid = false;
+                 } else if (!validateEmail(email)) {
+                     errorMessages.push("Please enter a valid email address.");
+                     isValid = false;
+                 }
+
+                 // Validate Subject (not empty)
+                 if ($("#subject").val().trim() === "") {
+                     errorMessages.push("Please enter the subject.");
+                     isValid = false;
+                 }
+
+                 // Validate Message (not empty)
+                 if ($("#message").val().trim() === "") {
+                     errorMessages.push("Please enter your message.");
+                     isValid = false;
+                 }
+
+                 // If there are errors, show them and prevent form submission
+                 if (!isValid) {
+                     event.preventDefault();
+                     
+                     // Display error messages
+                     errorMessages.forEach(function(message) {
+                         $("#errorList").append("<li>" + message + "</li>");
+                     });
+                     $("#errorMessages").show(); // Show the error div
+                 }
+             });
+
+             // Function to validate email format
+             function validateEmail(email) {
+                 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                 return emailRegex.test(email);
+             }
+         });
+      </script>
+   
    </body>
 </html>

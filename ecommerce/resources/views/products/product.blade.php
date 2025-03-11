@@ -68,8 +68,8 @@
              <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-               <a href="{{ route('products.index', ['sort' => 'asc']) }}">Name (A-Z)</a>
-               <a href="{{ route('products.index', ['sort' => 'desc']) }}">Name (Z-A)</a>
+               <a href="{{ route('products.index', ['sort' => 'asc']) }}">Price(Low to High)</a>
+               <a href="{{ route('products.index', ['sort' => 'desc']) }}">Price(High to Low)</a>
             </div>
           </div>
       <div class="row">

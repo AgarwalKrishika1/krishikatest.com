@@ -1,4 +1,3 @@
-
 @if (Auth::check() && auth()->user()->email_verified_at)
 
 <section class="subscribe_section">
@@ -30,11 +29,6 @@
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
 
-                        <!-- Error message section -->
-                        <div id="errorMessages" class="alert alert-danger" style="display: none;">
-                            <ul id="errorList"></ul>
-                        </div>
-
                         <!-- Success message section -->
                         <div id="successMessages" class="alert alert-success" style="display: none;">
                             <p> Please <a href="/register">register with us</a> to continue.</p>
@@ -53,6 +47,12 @@
                                 </div>
                             @enderror
 
+
+                        <!-- Error message section -->
+                        <div id="errorMessages" class="alert " style="display: none;">
+                            <ul id="errorList"></ul>
+                        </div>
+
                             <button type="submit">Subscribe</button>
                         </form>
                     </div>
@@ -70,10 +70,9 @@
             let isValid = true;
             let errorMessages = [];
 
-            // Clear previous error messages
-            $("#errorList").empty(); // Clear the list of errors
-            $("#errorMessages").hide(); // Hide error section initially
-            $("#successMessages").hide(); // Hide success section initially
+            $("#errorList").empty(); 
+            $("#errorMessages").hide(); 
+            $("#successMessages").hide(); 
 
             // Validate Email (not empty and valid email format)
             let email = $("#email").val().trim();

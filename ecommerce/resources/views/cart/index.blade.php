@@ -1,89 +1,80 @@
 @include('frontend.header')
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!-- Basic -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="shortcut icon" href="/images/favicon.png" type="">
-    <title>E-commerce website</title>
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="/home/css/bootstrap.css" />
-    <!-- font awesome style -->
-    <link href="/home/css/font-awesome.min.css" rel="stylesheet" />
-    <!-- Custom styles for this template -->
-    <link href="/home/css/style.css" rel="stylesheet" />
-    <!-- responsive style -->
-    <link href="/home/css/responsive.css" rel="stylesheet" />
+   @include('frontend.css')
 </head>
 <body>
-<h2>Your Cart</h2>
+    <div class="container">
+        <h2 class="my-4">Your Cart</h2>
 
-@if(count($cart) >= 1)
+        @if(count($cart) >= 1)
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($cart as $index => $item)
+                        <tr>
+                            <td>
+                                <strong>{{ $item['name'] }}</strong>
+                                <br>
+                                <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" style="width: 50px; height: 50px;">
+                            </td>
+                            <td>Rs {{ $item['price'] }}</td>
+                            <td>{{ $item['quantity'] }}</td>
+                            <td>Rs {{ $item['price'] * $item['quantity'] }}</td>
+                            <td>
+                                <form action="{{ route('cart.remove', ['index' => $index]) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash "> </i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
 
-    <ul>
-        @foreach($cart as $index => $item)
-            <li>
-                <strong>{{ $item['name'] }}</strong> 
-                - Rs {{ $item['price'] }} 
-                x {{ $item['quantity'] }}
-                <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" style="width:50px;height:50px;">
-            </li>
-            <form action="{{ route('cart.remove', ['index' => $index]) }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Remove</button>
-            </form>
-        @endforeach
-    </ul>
+            <!-- Total Calculation -->
+            <?php
+                $total = array_sum(array_map(function($item) {
+                    return $item['price'] * $item['quantity'];
+                }, $cart));
+                session(['total_amount' => $total]); // Store the total in the session
+            ?>
+            <h3>Total: Rs {{ number_format($total, 2) }}</h3>
 
-    <?php
-        // Assuming this is the total calculation block
-        $total = array_sum(array_map(function($item) {
-            return $item['price'] * $item['quantity'];
-        }, $cart));
+            <!-- Navigation and Checkout -->
+            <div class="my-4">
+                <a href="/products" class="btn btn-primary">Back to Products</a>
+                <br><br>
+                <form action="{{ route('order.checkout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Proceed to Checkout</button>
+                </form>
+            </div>
+        @else
+            <p>Your cart is empty.</p>
+        @endif
+    </div>
 
-        // Store the total in a session variable
-        session_start();
-        $_SESSION['total_amount'] = $total;
-        ?>
-        <h3>Total: Rs <?php echo $total; ?></h3>
-
-        
-    <br>
-    <a href="/products" class="btn btn-primary">Back</a>
-    <br><br>
-    <form action="{{ route('order.checkout') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-primary">Checkout</button>
-    </form>
-    <br>
-   
-    @else
-        <p>Your cart is empty.</p>
-    @endif
-
-    <!-- jQery -->
+    <!-- jQuery -->
     <script src="/home/js/jquery-3.4.1.min.js"></script>
-    <!-- popper js -->
+    <!-- Popper.js -->
     <script src="/home/js/popper.min.js"></script>
-    <!-- bootstrap js -->
+    <!-- Bootstrap JS -->
     <script src="/home/js/bootstrap.js"></script>
-    <!-- custom js -->
+    <!-- Custom JS -->
     <script src="/home/js/custom.js"></script>
-
 </body>
 </html>
 
 @include('frontend.footer')
-
-
-
-

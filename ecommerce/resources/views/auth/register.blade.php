@@ -28,7 +28,7 @@
          @endif
         <h2>Register</h2>
 
-        <form action="{{ route('register') }}" method="POST">
+        <form action="{{ route('register') }}" method="POST" novalidate>
             @csrf
             <div class="form-group">
                 <label for="name">Name</label>

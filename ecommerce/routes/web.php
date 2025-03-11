@@ -70,22 +70,6 @@ Route::get('contact', function () {
     return view('contact');
 });
 
-// Route::get('/a', [TemplateController::class,'index'])->name('templateHome');
-
-
-// normal user
-// Route::middleware(['auth', 'user-access:user'])->group(function () {
-
-//     Route::get('/', [HomeController::class, 'index'])->name('home');
-
-// });
-
-// //admin user
-// Route::middleware(['auth', 'user-access:admin'])->group(function () {
-
-//     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
-
-// });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
@@ -113,16 +97,6 @@ Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('
 Route::get('/add-to-cart-view', [ProductController::class, 'addToCartView'])->name('products.addToCartView');
 Route::delete('/add-to-cart/{index}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/fetch-products', [ProductController::class, 'fetchAndSaveProducts']);
-
-// Route::get('/', function () {
-   
-//     if(Auth::check() && Auth::user()->type == 'admin'){
-//         return view('adminHome');
-//     }
-//     return view('frontend.master');
-// })->name('home');
-
-
 
 // email verification
 
@@ -162,7 +136,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('user/{id}', [AdminController::class, 'updateUser'])->name('admin.user.update');
     Route::delete('user/{id}', [AdminController::class, 'deleteUser'])->name('admin.user.delete');
 
-    // Route::resource('sliders', SaleSliderController::class);
 
     //slider
     Route::get('home', [SaleSliderController::class, 'index'])->name('admin.sliders.index');

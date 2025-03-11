@@ -49,12 +49,10 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
        
-    // Check if the user's email is verified
+   
     if ($user->hasVerifiedEmail()) {  
         return redirect()->route('home');
     } else {
-       
-        // Redirect to home with a status message
         return redirect()->route('home')->with('status', 'Please verify. An email is sent for the same ');
     }
     }

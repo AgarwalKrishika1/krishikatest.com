@@ -24,23 +24,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    // public function index()
-    // {
-    //     if (Auth::check() && Auth::user()->type == 'admin') {
-    //         return view('adminHome');
-    //     }
-    //     elseif(!Auth::check()){
-    //         $sales = SaleSlider::all();  // Get active sales
-       
-    //         return view('frontend.master',compact('sales'));
-    //     }
-    //     return view('frontend.master',compact('sales'));
-    // }   
-
 
     public function index()
     {
-        // Show the master page by default
+        // home by default
         echo Auth::check();
         if (Auth::check() && Auth::user()->type == 'admin') {
             return view('adminHome');
@@ -59,11 +46,8 @@ class HomeController extends Controller
      */
 
      public function adminHome(): View
-
      {
- 
          return view('adminHome');
- 
      }
 
 }

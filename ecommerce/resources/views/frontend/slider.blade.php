@@ -5,13 +5,6 @@
             <img src="/images/slider-bg.jpg" alt="">
         </div>
         <div class="carousel-inner">
-{{-- 
-            @php
-       use App\Models\SaleSlider;
-       $sales = SaleSlider::all();
-     
-       @endphp --}}
-
 
             @foreach($sales as $index => $sale)
                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">

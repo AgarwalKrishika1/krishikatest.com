@@ -23,11 +23,20 @@
 </head>
 <body>
 
-
+@include('frontend.header')
     <section>
         <div class="container">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
             <h2>Enter Shipping Information</h2>
-            <form action="{{ route('order.saveShipping') }}" method="POST">
+            <form action="{{ route('order.saveShipping') }}" method="POST" novalidate>
                 @csrf
                 <input type="hidden" name="order_id" value="{{ $order->id }}">
                 
@@ -47,6 +56,7 @@
                 </div>
         
                 <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+                <br><br>
             </form>
         </div>
         </section>

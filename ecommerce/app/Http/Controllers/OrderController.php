@@ -13,16 +13,11 @@ class OrderController extends Controller
     public function checkout(Request $request)
     {
         
-        $cartItems = json_decode(Cookie::get('cart', '[]'), true);
-        $total = array_sum(array_map(function($item) {
-            return $item['price'] * $item['quantity'];
-        }, $cartItems));
-        
         // Create Order
         $order = Order::create([
             'user_id' => auth()->id(),
             'status' => 'Pending',
-            'total_price' => $total
+            'total_price' => session('total_amount')
         ]);
 
       // address details

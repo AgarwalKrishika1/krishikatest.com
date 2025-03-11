@@ -106,14 +106,12 @@ class RegisterController extends Controller
         Auth::login($user);
 
             
-    // Check if the user's email is verified
+    // if verified
     if ($user->hasVerifiedEmail()) {
-        // Redirect to the home page if the email is verified
-       
+        // to home
         return redirect()->route('home');
     } else {
-       
-        // Redirect to home with a status message
+        //home with message
         return redirect()->route('register')->with('status', 'An email is sent to verify, please verify');
     }
     }

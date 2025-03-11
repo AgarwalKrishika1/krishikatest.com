@@ -1,9 +1,4 @@
-{{-- need to make changes here for better ui --}}
-
 @extends('layout')
-
-
-
 
 @section('title', 'Dashboard')
 
@@ -29,8 +24,7 @@
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+  
     
 @stop
 

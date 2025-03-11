@@ -57,21 +57,21 @@ class AuthenticatedSessionController extends Controller
 
     public function customLogout(Request $request)
     {
-        // Get the logged-in user
+        // logged-in user
         $user = Auth::user();
 
-        // Check if the user is logged in
+        // if logged-in user
         if ($user) {
-            // Get the cart data from the session
+            // cart from session
             $cartData = session('cart', []);
 
-            // Get the cart data from the cookie (if exists)
+            // cart from cookie(if exists)
             $cookieCart = json_decode(Cookie::get('cart', '[]'), true);
 
-            // Merge session cart and cookie cart data
+            // Merge 
             $mergedCart = array_merge($cartData, $cookieCart);
 
-            // Save the merged cart data to the database
+            // Save to db
             if (!empty($mergedCart)) {
                 Cart::updateOrCreate(
                     ['user_id' => $user->id], // Find by user_id
@@ -79,12 +79,12 @@ class AuthenticatedSessionController extends Controller
                 );
             }
 
-            // Optionally, clear the session and cookie cart after saving
+            //clear session,cookie
             session()->forget('cart');
             Cookie::queue(Cookie::forget('cart'));
         }
 
-        // Perform the logout
+        // logout
         Auth::guard('web')->logout();
 
         // Invalidate the session and regenerate the token

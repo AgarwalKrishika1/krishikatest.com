@@ -14,7 +14,7 @@
 <tbody>
     @php
     use App\Models\Products;
-    $products = Products::all();
+    $products = Products::simplepaginate(5);
     @endphp
 @foreach($products as $product)
    <tr>
@@ -33,4 +33,6 @@
 @endforeach
 </tbody>
 </table>
+
+{{ $products->links() }}
 </section>

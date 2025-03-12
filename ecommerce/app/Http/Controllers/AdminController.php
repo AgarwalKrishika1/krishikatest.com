@@ -12,9 +12,9 @@ class AdminController extends Controller
     public function index()
     {
         // Fetch the products from the database (you can add any condition here to filter)
-        $products = Products::all();
+       // $products = Products::all();
         
-        return view('adminHome', compact('products'));
+        return view('adminHome');
     }
 
     public function editProduct($id)

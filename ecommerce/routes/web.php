@@ -76,21 +76,12 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::middleware(['auth'])->group(function () {
 
     Route::post('/custom-logout', [AuthenticatedSessionController::class, 'customLogout'])->name('custom.logout');
-   
-   
-
-    
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
     Route::get('/order/{orderId}/shipping', [OrderController::class, 'shippingForm'])->name('order.shippingForm');
     Route::post('/order/save-shipping', [OrderController::class, 'saveShipping'])->name('order.saveShipping');
-
     Route::post('checkout', [OrderController::class, 'checkout'])->name('order.checkout')->middleware('verified');
-    
-   Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show')
-                ->middleware('verified');
-
-
-Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
+    Route::get('payment/{orderId}', [PaymentController::class, 'showPaymentForm'])->name('payment.show')->middleware('verified');
+    Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
 });
 
 Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('products.addToCart');
@@ -104,17 +95,12 @@ Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
-
-
-
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     
     $request->fulfill();
 
     return redirect('login')->with('status', 'You are verified, please login to continue');
 })->middleware(['auth', 'signed'])->name('verification.verify');
-
-
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
@@ -126,8 +112,8 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 // admin
 
-Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('', [AdminController::class, 'index'])->name('admin.index');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('home', [AdminController::class, 'index'])->name('admin.index');
     Route::get('product/{id}/edit', [AdminController::class, 'editProduct'])->name('admin.edit');
     Route::put('product/{id}', [AdminController::class, 'updateProduct'])->name('admin.update');
     Route::delete('product/{id}', [AdminController::class, 'deleteProduct'])->name('admin.delete');
@@ -138,15 +124,34 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
 
     //slider
-    Route::get('home', [SaleSliderController::class, 'index'])->name('admin.sliders.index');
+    Route::get('sliders', [SaleSliderController::class, 'index'])->name('admin.sliders.index');
    Route::get('sliders/create', [SaleSliderController::class, 'create'])->name('admin.sliders.create');
     Route::post('sliders', [SaleSliderController::class, 'store'])->name('admin.sliders.store');
     Route::get('sliders/{saleSlider}/edit', [SaleSliderController::class, 'edit'])->name('admin.sliders.edit');
     Route::put('sliders/{saleSlider}', [SaleSliderController::class, 'update'])->name('admin.sliders.update');
     Route::delete('sliders/{saleSlider}', [SaleSliderController::class, 'destroy'])->name('admin.sliders.delete');
 
+    Route::get('admin', function () {
+        return view('adminHome');
+    })->name('admin.home');
 
+
+    Route::get('dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
     Route::get('products', function () {
         return view('admin.product');
-    });
+    })->name('admin.products');
+
+    Route::get('users', function () {
+        return view('admin.users');
+    })->name('admin.users');
+
+    Route::get('orders', function () {
+        return view('admin.orders');
+    })->name('admin.orders');
+
+    Route::get('sliders', function () {
+        return view('admin.sale_slider');
+    })->name('admin.sliders');
 });

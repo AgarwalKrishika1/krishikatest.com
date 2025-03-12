@@ -9,18 +9,18 @@
     </div>
     <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
     <ul class="list-unstyled">
-            <li class="active"><a href=""> <i class="icon-home"></i>Home </a></li>
-            <li><a href="#products"> <i class="icon-grid"></i>Products </a></li>
-            <li><a href="#users"> <i class="fa fa-bar-chart"></i>Users </a></li>
-            <li><a href="#orders"> <i class="icon-padnote"></i>Orders </a></li>
-            <li><a href="#sale_slider"> <i class="icon-padnote"></i>Sales </a></li>
-            {{-- <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Example dropdown </a>
+            <li class="active"><a href="{{route('admin.home')}}"> <i class="icon-home"></i>Home </a></li>
+            <li><a href="{{route('admin.products')}}"> <i class="icon-grid"></i>Products </a></li>
+            <li><a href="{{route('admin.users')}}"> <i class="fa fa-bar-chart"></i>Users </a></li>
+            <li><a href="{{route('admin.orders')}}"> <i class="icon-padnote"></i>Orders </a></li>
+            <li><a href="{{route('admin.sliders')}}"> <i class="icon-padnote"></i>Sales </a></li>
+            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Products</a>
               <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                <li><a href="#">Page</a></li>
-                <li><a href="#">Page</a></li>
-                <li><a href="#">Page</a></li>
+                <li><a href="#">All</a></li>
+                <li><a href="#">Edit</a></li>
+                <li><a href="#">Delete</a></li>
               </ul>
-            </li> --}}
+            </li>
             <li><a href="/login"> <i class="icon-logout"></i>Login page </a></li>
     {{-- </ul><span class="heading">Extras</span>
     <ul class="list-unstyled">

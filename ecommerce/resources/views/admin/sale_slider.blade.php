@@ -1,3 +1,5 @@
+@include('admin.css')
+@include('admin.header')
  <section class="slider">
    <h2> slider </h2>
    <table class="table">

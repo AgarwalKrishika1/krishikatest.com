@@ -9,7 +9,7 @@
         <section class="no-padding-bottom">
           <div class="container-fluid">
             {{-- bar chart --}}
-            {{-- <div class="row">
+            <div class="row">
               <div class="col-lg-4">
                 <div class="bar-chart block no-margin-bottom">
                   <canvas id="barChartExample1"></canvas>
@@ -23,21 +23,21 @@
                   <canvas id="lineCahrt"></canvas>
                 </div>
               </div>
-            </div> --}}
+            </div>
             
-            @include('admin.product')
+            {{-- @include('admin.product')
 
 
             @include('admin.users')
 
 
-            @include('admin.sale_slider')
+            @include('admin.sale_slider') --}}
           </div>
         </section>
         <section class="no-padding-bottom">
           <div class="container-fluid">
             {{-- 2nd chart --}}
-            {{-- <div class="row">
+            <div class="row">
               <div class="col-lg-6">
                 <div class="stats-2-block block d-flex">
                   <div class="stats-2 d-flex">
@@ -78,7 +78,7 @@
                   <canvas id="lineChart1"></canvas>
                 </div>
               </div>
-            </div> --}}
+            </div>
           </div>
         </section>
         <section class="no-padding-bottom">
@@ -86,7 +86,7 @@
 
            
             {{-- user data --}}
-            {{-- <div class="row">
+            <div class="row">
               <div class="col-lg-4">
                 <div class="user-block block text-center">
                   <div class="avatar"><img src="/admincss/img/avatar-1.jpg" alt="..." class="img-fluid">
@@ -129,8 +129,8 @@
                   </div>
                 </div>
               </div>
-            </div> --}}
-            {{-- <div class="public-user-block block">
+            </div>
+            <div class="public-user-block block">
               <div class="row d-flex align-items-center">                   
                 <div class="col-lg-4 d-flex align-items-center">
                   <div class="order">4th</div>
@@ -147,8 +147,8 @@
                   </div>
                 </div>
               </div>
-            </div> --}}
-            {{-- <div class="public-user-block block">
+            </div>
+            <div class="public-user-block block">
               <div class="row d-flex align-items-center">                   
                 <div class="col-lg-4 d-flex align-items-center">
                   <div class="order">5th</div>
@@ -183,13 +183,13 @@
                   </div>
                 </div>
               </div>
-            </div> --}}
+            </div>
           </div>
         </section>
         <section class="margin-bottom-sm">
           <div class="container-fluid">
             {{-- sales chart --}}
-            {{-- <div class="row d-flex align-items-stretch">
+            <div class="row d-flex align-items-stretch">
               <div class="col-lg-4">
                 <div class="stats-with-chart-1 block">
                   <div class="title"> <strong class="d-block">Sales Difference</strong><span class="d-block">Lorem ipsum dolor sit</span></div>
@@ -235,13 +235,13 @@
                   </div>
                 </div>
               </div>
-            </div> --}}
+            </div>
           </div>
         </section>
         <section class="no-padding-bottom">
           <div class="container-fluid">
             {{-- to do and new message --}}
-            {{-- <div class="row">
+            <div class="row">
               <div class="col-lg-6">
                 <div class="checklist-block block">
                   <div class="title"><strong>To Do List</strong></div>
@@ -299,13 +299,13 @@
                       <div class="content">   <strong class="d-block">Nader Magdy</strong><span class="d-block">lorem ipsum dolor sit amit</span><small class="date d-block">9:47pm</small></div></a></div>
                 </div>
               </div>
-            </div> --}}
+            </div>
           </div>
         </section>
         <section>
           <div class="container-fluid">
             {{-- credit sales --}}
-            {{-- <div class="row">
+            <div class="row">
               <div class="col-lg-4">
                 <div class="stats-with-chart-2 block">
                   <div class="title"><strong class="d-block">Credit Sales</strong><span class="d-block">Lorem ipsum dolor sit</span></div>
@@ -333,7 +333,7 @@
                   </div>
                 </div>
               </div>
-            </div> --}}
+            </div>
           </div>
         </section>
         <footer class="footer">

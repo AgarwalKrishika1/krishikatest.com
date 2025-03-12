@@ -1,3 +1,5 @@
+@include('admin.css')
+@include('admin.header')
 <section id="users">
 <h2> Users </h2>
 <table class="table">

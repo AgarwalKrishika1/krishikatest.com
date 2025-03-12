@@ -4,7 +4,7 @@
       <div class="container-fluid d-flex align-items-center justify-content-between">
         <div class="navbar-header">
           <!-- Navbar Header-->
-          <a href="home" class="navbar-brand">
+          <a href={{route('admin.home')}} class="navbar-brand">
             <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary"></strong><strong>Admin</strong></div>
             <div class="brand-text brand-sm"><strong class="text-primary"></strong><strong>Admin</strong></div></a>
           <!-- Sidebar Toggle Btn-->

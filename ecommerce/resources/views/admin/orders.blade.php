@@ -5,7 +5,7 @@
 <table class="table">
 <thead>
 <tr>
-   <th>User ID</th>
+   <th>User Name</th>
    <th>Total Price</th>
    <th>  </th>
    <th>Actions</th>
@@ -14,17 +14,17 @@
 <tbody>
     @php
     use App\Models\order;
-    $orders = order::all();
+    $orders = order::with('user')->get();
     @endphp
 @foreach($orders as $order)
    <tr>
-       <td>{{ $order->user_id }}</td>
+       <td>{{ $order->user->name }}</td>
       
        <td>{{ $order->total_price }}</td>
        <td></td>
        <td>
-           <a href="{{ route('admin.edit', $order->id) }}" class="btn btn-warning">Edit</a>
-           <form action="{{ route('admin.delete', $order->id) }}" method="POST" style="display:inline;">
+
+           <form action="{{ route('admin.order.delete', $order->id) }}" method="POST" style="display:inline;">
                @csrf
                @method('DELETE')
                <button type="submit" class="btn btn-danger">Delete</button>

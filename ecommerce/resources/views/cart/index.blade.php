@@ -54,7 +54,7 @@
 
             <!-- Navigation and Checkout -->
             <div class="my-4">
-                <a href="/products" class="btn btn-primary">Back to Products</a>
+                <a href="/test-products" class="btn btn-primary">Back to Products</a>
                 <br><br>
                 <form action="{{ route('order.checkout') }}" method="POST">
                     @csrf

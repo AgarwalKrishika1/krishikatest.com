@@ -88,7 +88,7 @@ public function addToCart($id)
     $product = Products::find($id);
 
     if (!$product) {
-        return redirect()->route('products.index')->with('error', 'Product not found!');
+        return redirect()->route('testProducts')->with('error', 'Product not found!');
     }
 
     //user logged

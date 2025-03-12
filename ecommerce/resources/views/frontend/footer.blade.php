@@ -49,13 +49,13 @@
                        </form>
                        
                      </li>
-                      <li><a href="/products">Shopping</a></li>
+                      <li><a href="test-products">Shopping</a></li>
 
                        @else
                        <li><a href="/">Account</a></li>
                        <li><a href="/login">Login</a></li>
                       <li><a href="/register">Register</a></li>
-                       <li><a href="/products">Shopping</a></li>
+                       <li><a href="test-products">Shopping</a></li>
                       @endauth
                      @endif
                    </ul>

@@ -12,4 +12,14 @@ class order extends Model
         "user_id",
         'total_price',
     ] ;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function shipping()
+    {
+        return $this->hasOne(Shipping::class);
+    }
 }

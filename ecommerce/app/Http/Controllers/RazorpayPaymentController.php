@@ -88,7 +88,7 @@ class RazorpayPaymentController extends Controller
 
         Session::put('success', 'Payment successful');
     
-        return redirect('/products')->with(setcookie('cart','',time()-3600));
+        return redirect('test-products')->with(setcookie('cart','',time()-3600));
 
     }
 

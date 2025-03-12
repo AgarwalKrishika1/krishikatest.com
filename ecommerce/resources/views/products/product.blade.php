@@ -55,10 +55,10 @@
            </button>
            <div class="dropdown-content">
             
-             <a href="{{ route('products.index', ['category' => 'jewelery']) }}">Jewelery</a>
-             <a href="{{ route('products.index', ['category' => 'electronics']) }}">Electronics</a>
-             <a href="{{ route('products.index', ['category' => "men's clothing"]) }}">Men's clothing</a>
-             <a href="{{ route('products.index', ['category' => "women's clothing"]) }}">Women's clothing</a>
+             <a href="{{ route('testProducts', ['category' => 'jewelery']) }}">Jewelery</a>
+             <a href="{{ route('testProducts', ['category' => 'electronics']) }}">Electronics</a>
+             <a href="{{ route('testProducts', ['category' => "men's clothing"]) }}">Men's clothing</a>
+             <a href="{{ route('testProducts', ['category' => "women's clothing"]) }}">Women's clothing</a>
            </div>
          </div>
 
@@ -68,8 +68,8 @@
              <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-               <a href="{{ route('products.index', ['sort' => 'asc']) }}">Price(Low to High)</a>
-               <a href="{{ route('products.index', ['sort' => 'desc']) }}">Price(High to Low)</a>
+               <a href="{{ route('testProducts', ['sort' => 'asc']) }}">Price(Low to High)</a>
+               <a href="{{ route('testProducts', ['sort' => 'desc']) }}">Price(High to Low)</a>
             </div>
           </div>
       <div class="row">
@@ -103,7 +103,7 @@
          @endforeach
       </div>
       <div class="btn-box">
-         <a href="{{ route('products.index') }}">
+         <a href="{{ route('testProducts') }}">
             View All products
          </a>
       </div>

@@ -39,6 +39,10 @@ require __DIR__.'/auth.php';
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/test-products', [ProductController::class, 'index'])->name('testProducts');
+
+// Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
+
 Auth::routes(['verify' => true]);
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -71,7 +75,6 @@ Route::get('contact', function () {
 });
 
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -122,10 +125,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('user/{id}', [AdminController::class, 'updateUser'])->name('admin.user.update');
     Route::delete('user/{id}', [AdminController::class, 'deleteUser'])->name('admin.user.delete');
 
+    Route::delete('orders/{id}', [AdminController::class, 'deleteOrder'])->name('admin.order.delete');
 
     //slider
     Route::get('sliders', [SaleSliderController::class, 'index'])->name('admin.sliders.index');
-   Route::get('sliders/create', [SaleSliderController::class, 'create'])->name('admin.sliders.create');
+    Route::get('sliders/create', [SaleSliderController::class, 'create'])->name('admin.sliders.create');
     Route::post('sliders', [SaleSliderController::class, 'store'])->name('admin.sliders.store');
     Route::get('sliders/{saleSlider}/edit', [SaleSliderController::class, 'edit'])->name('admin.sliders.edit');
     Route::put('sliders/{saleSlider}', [SaleSliderController::class, 'update'])->name('admin.sliders.update');
@@ -154,4 +158,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('sliders', function () {
         return view('admin.sale_slider');
     })->name('admin.sliders');
+
 });

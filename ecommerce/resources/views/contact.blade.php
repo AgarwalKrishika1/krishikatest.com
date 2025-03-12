@@ -44,7 +44,7 @@
                            <div id="errorMessages" class="alert alert-danger"  style="display: none;" >
                               <ul id="errorList"></ul>
                         </div>
-                     <form id="contactForm" action="{{route('products.index')}}"  novalidate >
+                     <form id="contactForm" action="{{route('testProducts')}}"  novalidate >
                         <fieldset>
                            <input type="text" id="name" placeholder="Enter your full name" name="name" required />
                            <input type="email" id="email" placeholder="Enter your email address" name="email" required />

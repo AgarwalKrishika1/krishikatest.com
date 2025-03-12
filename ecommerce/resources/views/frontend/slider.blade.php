@@ -22,11 +22,11 @@
                                     <p></p>
                                     <div class="btn-box">
                                         @if ($sale->category == 'all')
-                                        <a href="{{ url()->current() . '/products' }}" class="btn1">
+                                        <a href="{{ url()->current() . '/test-products' }}" class="btn1">
                                             Shop Now
                                         </a>
                                        @else
-                                        <a href="{{ url()->current() . '/products?category=' . $sale->category }}" class="btn1">
+                                        <a href="{{ url()->current() . '/test-products?category=' . $sale->category }}" class="btn1">
                                             Shop Now
                                         </a>
                                         @endif

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .highlight {
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Employee Table</h2>
+
+    
+    <input type="text" id="searchInput" placeholder="Search..." oninput="filterTable()">
+    <p>Selected Rows: <span id="selectedCount">0</span></p>
+
+    <table id="employeeTable">
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"> Select All</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Department</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox" class="rowCheckbox" onclick="updateSelectedCount()"></td>
+                <td>1</td>
+                <td>user1</td>
+                <td>29</td>
+                <td>HR</td>
+                <td>40k</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="rowCheckbox" onclick="updateSelectedCount()"></td>
+                <td>2</td>
+                <td>user2</td>
+                <td>35</td>
+                <td>Finance</td>
+                <td>65k</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="rowCheckbox" onclick="updateSelectedCount()"></td>
+                <td>3</td>
+                <td>user3</td>
+                <td>40</td>
+                <td>IT</td>
+                <td>70k</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="rowCheckbox" onclick="updateSelectedCount()"></td>
+                <td>4</td>
+                <td>user4</td>
+                <td>28</td>
+                <td>Marketing</td>
+                <td>55k</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="rowCheckbox" onclick="updateSelectedCount()"></td>
+                <td>5</td>
+                <td>user5</td>
+                <td>45</td>
+                <td>Sales</td>
+                <td>48k</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function updateSelectedCount() {
+            const selectedRows = document.querySelectorAll('.rowCheckbox:checked');
+            document.getElementById('selectedCount').innerText = selectedRows.length;
+        }
+
+        function toggleSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('.rowCheckbox');
+            checkboxes.forEach(checkbox => checkbox.checked = selectAllCheckbox.checked);
+            updateSelectedCount();
+        }
+
+        function filterTable() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#employeeTable tbody tr');
+            
+            //Remove highlight after one search
+            rows.forEach(row => row.classList.remove('highlight'));
+
+            if (searchInput === '') {
+                return;
+            }
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowText = Array.from(cells).slice(1).map(cell => cell.textContent.toLowerCase()).join(' ');
+                
+                if (rowText.includes(searchInput)) {
+                    row.classList.add('highlight');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

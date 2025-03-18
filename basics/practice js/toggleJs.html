@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Toggle Pricing Plans</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .active {
+      background-color: grey;
+    }
+  </style>
+</head>
+<body>
+    <div>
+        <button id="monthly">Monthly Price</button>
+        <button id="yearly">Yearly Price</button>
+        
+        <p id="p1" style="display:none">
+            This is monthly price
+        </p>
+        
+        <p id="p2" style="display:none">
+            This is yearly price
+        </p>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+          
+          $("#monthly").click(function(){
+            $("#monthly").addClass("active");
+            $("#yearly").removeClass("active");
+            $("#p1").toggle(1000);
+            $("#p2").hide(1000);  
+          });
+
+          $("#yearly").click(function(){
+            $("#yearly").addClass("active");
+            $("#monthly").removeClass("active");
+            $("#p2").toggle(1000);
+            $("#p1").hide(1000); 
+          });
+          
+        });
+    </script>
+</body>
+</html>

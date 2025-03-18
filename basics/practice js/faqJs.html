@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<style> 
+#panel, #flip, #panel2, #flip2 {
+  padding: 5px;
+  text-align: center;
+  background-color: bisque;
+  border: solid 1px black;
+}
+
+#panel, #panel2 {
+  padding: 50px;
+  background-color: beige;
+  display: none;
+}
+</style>
+</head>
+<body>
+ 
+<div id="flip">Question 1</div>
+<div id="panel">Answer to Question 1</div>
+<br><br>
+<div id="flip2">Question 2</div>
+<div id="panel2">Answer to Question 2</div>
+
+<script> 
+    $(document).ready(function(){
+      $("#flip").click(function(){
+        $("#panel").slideToggle("slow");
+        $("#panel2").slideUp()
+      });
+
+      $("#flip2").click(function(){
+        $("#panel2").slideToggle("slow");
+        $("#panel").slideUp()
+      });
+    });
+    </script>
+</body>
+</html>

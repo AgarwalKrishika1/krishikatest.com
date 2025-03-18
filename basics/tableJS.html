@@ -118,6 +118,26 @@
                 }
             });
         }
+        
+        function updateSelectAllState() {
+            const checkboxes = document.querySelectorAll('.rowCheckbox');
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+            const someChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+
+            if (allChecked) {
+                selectAllCheckbox.checked = true;
+            } else {
+                selectAllCheckbox.checked = false;
+            }
+
+            updateSelectedCount();
+        }
+
+        document.querySelectorAll('.rowCheckbox').forEach(checkbox => {
+            checkbox.addEventListener('change', updateSelectAllState);
+        });
+        
     </script>
 
 </body>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm" novalidate>
+            <!-- Full Name -->
+            <label for="fullName">Full Name (Required):</label>
+            <input type="text" id="fullName" name="fullName" required>
+            <span id="fullNameError" class="error hidden">Please enter a valid name (letters and spaces only).</span>
+            <br><br>
+    
+            <!-- Email -->
+            <label for="email">Email (Required):</label>
+            <input type="email" id="email" name="email" required>
+            <span id="emailError" class="error hidden">Please enter a valid email address.</span>
+            <br><br>
+    
+            <!-- Password -->
+            <label for="password">Password (Required, minimum 6 characters):</label>
+            <input type="password" id="password" name="password" required>
+            <span id="passwordError" class="error hidden">Password must be at least 6 characters long.</span>
+            <br><br>
+    
+            <!-- Confirm Password -->
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <span id="confirmPasswordError" class="error hidden">Passwords must match.</span>
+            <br><br>
+    
+            <!-- Phone Number -->
+            <label for="phone">Phone Number (Optional):</label>
+            <input type="text" id="phone" name="phone">
+            <span id="phoneError" class="error hidden">Please enter a valid 10-digit phone number.</span>
+            <br><br>
+    
+            <!-- Date of Birth & Age -->
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob">
+            <br><br>
+    
+            <!-- Age (Auto-calculated) -->
+            <label for="age">Age (Required):</label>
+            <input type="text" id="age" name="age" readonly required>
+            <span id="ageError" class="error hidden">Please enter a valid age.</span>
+            <br><br>
+    
+            <!-- Gender -->
+            <label>Gender (Required):</label>
+            <input type="radio" id="male" name="gender" value="Male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female" required>
+            <label for="female">Female</label>
+            <span id="genderError" class="error hidden">Please select a gender.</span>
+            <br><br>
+    
+            <!-- Marital Status -->
+            <label for="maritalStatus">Marital Status:</label>
+            <select id="maritalStatus" name="maritalStatus">
+                <option value="">Select Marital Status</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widowed">Widowed</option>
+            </select>
+            <br><br>
+    
+            <!-- Dynamic Fields based on Marital Status -->
+            <div id="spouseNameField" class="hidden">
+                <label for="spouseName">Spouse Name:</label>
+                <input type="text" id="spouseName" name="spouseName">
+                <br><br>
+            </div>
+            <div id="yearsSinceDivorceField" class="hidden">
+                <label for="yearsSinceDivorce">Years Since Divorce:</label>
+                <input type="number" id="yearsSinceDivorce" name="yearsSinceDivorce">
+                <span id="yearsSinceDivorceError" class="error hidden">Years since divorce must be less than your age.</span>
+                <br><br>
+            </div>
+    
+            <!-- Employment Status -->
+            <label for="employmentStatus">Employment Status:</label>
+            <select id="employmentStatus" name="employmentStatus">
+                <option value="">Select Employment Status</option>
+                <option value="Employed">Employed</option>
+                <option value="Self-Employed">Self-Employed</option>
+                <option value="Student">Student</option>
+                <option value="Unemployed">Unemployed</option>
+            </select>
+            <br><br>
+    
+            <!-- Dynamic Fields based on Employment Status -->
+            <div id="companyNameField" class="hidden">
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" name="companyName">
+                <br><br>
+            </div>
+            <div id="instituteNameField" class="hidden">
+                <label for="instituteName">Institute Name:</label>
+                <input type="text" id="instituteName" name="instituteName">
+                <br><br>
+            </div>
+    
+            <!-- Country -->
+            <label for="country">Country:</label>
+            <select id="country" name="country" required>
+                <option value="">Select Country</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+            </select>
+            <br><br>
+    
+            <div id="stateField" class="hidden">
+                <label for="state">State:</label>
+                <select id="state" name="state">
+                    <option value="">Select State</option>
+                    <!-- States will be populated dynamically -->
+                </select>
+                <br><br>
+            </div>
+            
+    
+            <!-- City Name (Hidden based on State Selection) -->
+            <label for="city">City Name:</label>
+            <input type="text" id="city" name="city">
+            <br><br>
+    
+            <!-- Username Availability Check -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <span id="usernameError" class="error hidden">Username already taken.</span>
+            <br><br>
+    
+            <!-- Referral Code -->
+            <label for="referralCode">Referral Code (Optional):</label>
+            <input type="text" id="referralCode" name="referralCode">
+            <span id="referralCodeError" class="error hidden">Invalid referral code.</span>
+            <br><br>
+    
+            <!-- Terms and Conditions -->
+            <label>
+                <input type="checkbox" id="terms" name="terms" required>
+                I agree to the Terms & Conditions.
+            </label>
+            <span id="termsError" class="error hidden">You must agree to the terms and conditions.</span>
+            <br><br>
+    
+            <button type="submit">Submit</button>
+        </form>
+    
+        <div id="successMessage" class="success hidden">
+            Registration successful! Thank you for signing up.
+        </div>
+    </div>
+   
+
+  <script src="myvalidation.js"></script>
+    
+</body>
+</html>

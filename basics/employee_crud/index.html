@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee CRUD Operations with jQuery AJAX and PHP</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Employee CRUD Operations</h2>
+
+    <form id="crudForm">
+        <input type="hidden" id="employeeId" name="id">
+        <label>Name: </label><input type="text" id="name" name="name"><br><br>
+        <label>Position: </label><input type="text" id="position" name="position"><br><br>
+        <label>Salary: </label><input type="number" step="500" id="salary" name="salary"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h3>Employee List</h3>
+    <table id="employeeTable" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- from function call -->
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            function readEmployees() {
+                $.ajax({
+                    url: 'read.php',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);//check if data 
+                        if (data.length === 0) {
+                            $('#employeeTable tbody').html('<tr><td colspan="5">No employees found.</td></tr>');
+                            return;
+                        }
+
+                        let employeeTable = '';
+                        data.forEach(function(employee) {
+                            employeeTable += `
+                                <tr>
+                                    <td>${employee.id}</td>
+                                    <td>${employee.name}</td>
+                                    <td>${employee.position}</td>
+                                    <td>${employee.salary}</td>
+                                    <td>
+                                        <button class="editBtn" data-id="${employee.id}" data-name="${employee.name}" data-position="${employee.position}" data-salary="${employee.salary}">Edit</button>
+                                        <button class="deleteBtn" data-id="${employee.id}">Delete</button>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                        $('#employeeTable tbody').html(employeeTable);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("AJAX Error:", error); 
+                    }
+                });
+            }
+
+            readEmployees(); 
+
+            $('#crudForm').submit(function(e) {
+                e.preventDefault();
+
+                let id = $('#employeeId').val();
+                let name = $('#name').val();
+                let position = $('#position').val();
+                let salary = $('#salary').val();
+                let url = id ? 'update.php' : 'create.php';
+                let data = { name, position, salary };
+
+                if (id) data.id = id;
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: data,
+                    success: function(response) {
+                        alert(response);
+                        readEmployees();
+                        $('#crudForm')[0].reset();
+                        $('#employeeId').val('');
+                    }
+                });
+            });
+
+           //edit
+            $(document).on('click', '.editBtn', function() {
+                let id = $(this).data('id');
+                let name = $(this).data('name');
+                let position = $(this).data('position');
+                let salary = $(this).data('salary');
+
+                $('#employeeId').val(id);
+                $('#name').val(name);
+                $('#position').val(position);
+                $('#salary').val(salary);
+            });
+
+            //delete
+            $(document).on('click', '.deleteBtn', function() {
+                let id = $(this).data('id');
+
+                if (confirm('Are you sure you want to delete this employee?')) {
+                    $.ajax({
+                        url: 'delete.php',
+                        method: 'POST',
+                        data: { id },
+                        success: function(response) {
+                            alert(response);
+                            readEmployees();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

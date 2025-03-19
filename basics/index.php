@@ -44,14 +44,14 @@ if ($conn->query($sql) === TRUE) {
 }
 
 //select
-$sql = "SELECT * FROM user_profile";
+$sql = "SELECT * FROM employee";
 $result = $conn->query($sql);
-echo "User Profile table     ";
+echo "Employee table     ";
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-    echo "id: " . $row["id"]. " - Name: " . $row["name"]. " City- " . $row["city"]. 
-    " age- " . $row["age"]."<br>";
+    echo "id: " . $row["id"]. " - firstname: " . $row["firstname"]. " lastname- " . $row["lastname"]. 
+    " email- " . $row["email"]."<br>";
   }
 } else {
   echo "0 results";

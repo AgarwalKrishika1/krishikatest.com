@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    // Predefined lists for usernames and referral codes
+    // predefined username, referral code
     const usernames = ["user1", "user2", "user3"];
     const validReferralCodes = ["WELCOME1", "DISCOUNT50"];
 
-    // Handle Marital Status Change
+    // marital status change 
     $('#maritalStatus').on('change', function() {
         const maritalStatus = $(this).val();
         if (maritalStatus === "Married") {
@@ -18,7 +18,7 @@ $(document).ready(function() {
         }
     });
 
-    // Handle Employment Status Change
+    // employment status change
     $('#employmentStatus').on('change', function() {
         const employmentStatus = $(this).val();
         if (employmentStatus === "Employed" || employmentStatus === "Self-Employed") {
@@ -33,39 +33,39 @@ $(document).ready(function() {
         }
     });
 
-    // Object to store states based on country
+    // state and country
     const countryStates = {
         "India": ["Maharashtra", "Delhi", "Karnataka"],
         "USA": ["California", "New York", "Texas", "Florida"],
         "UK": ["England", "Scotland", "Wales", "Northern Ireland"]
     };
 
-    // Handle Country Change (For India, USA, UK - show State dropdown)
+    // country change 
     $('#country').on('change', function() {
         const country = $(this).val();
         const stateDropdown = $('#state');
 
-        // Clear the previous state options
+        // empty previous status 
         stateDropdown.empty();
 
         if (countryStates[country]) {
-            // Show the state field
+            // show state field
             $('#stateField').removeClass('hidden');
             
-            // Add the default "Select State" option
+            // default state
             stateDropdown.append('<option value="">Select State</option>');
 
-            // Add states corresponding to the selected country
+            // state as per country
             countryStates[country].forEach(function(state) {
                 stateDropdown.append('<option value="' + state + '">' + state + '</option>');
             });
         } else {
-            // Hide the state field if no states are needed (e.g., USA or UK)
+            // hide state field
             $('#stateField').addClass('hidden');
         }
     });
 
-    // Calculate Age based on DOB
+    // age from dob
     $('#dob').on('change', function() {
         const dob = new Date($(this).val());
         const today = new Date();
@@ -96,6 +96,9 @@ $(document).ready(function() {
             $('#referralCodeError').removeClass('hidden');
         }
     });
+
+
+
 
     // Handle form submission
     $('#registrationForm').on('submit', function(event) {

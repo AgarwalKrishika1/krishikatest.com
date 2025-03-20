@@ -295,8 +295,10 @@ $(document).ready(function() {
                 dataType: "json",
                 success: function(response) {
                     if (response.status === 'success') {
+                        $('#errorMessage').addClass('hidden');
                         $('#successMessage').removeClass('hidden');
                     } else {
+                        $('#successMessage').addClass('hidden');
                         $('#errorMessage').removeClass('hidden');
                         $('#errorMessage').text(response.message);  
                     }

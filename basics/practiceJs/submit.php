@@ -10,6 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+
+
     // Get the POST data from the AJAX request and escape them
     $fullName = $conn->real_escape_string($_POST['fullName']);
     $email = $conn->real_escape_string($_POST['email']);

@@ -45,7 +45,7 @@ $(document).ready(function() {
         const country = $(this).val();
         const stateDropdown = $('#state');
 
-        // empty previous status 
+        // empty previous state 
         stateDropdown.empty();
 
         if (countryStates[country]) {
@@ -77,7 +77,7 @@ $(document).ready(function() {
         $('#age').val(age);
     });
 
-    // Check Username Availability
+    // username availability
     $('#username').on('input', function() {
         const username = $(this).val();
         if (usernames.includes(username)) {
@@ -87,44 +87,17 @@ $(document).ready(function() {
         }
     });
 
-    // Validate Referral Code using AJAX
-    $('#referralCode').on('input', function() {
-        const referralCode = $(this).val();
-        if (referralCodes.includes(referralCode)) {
-            $('#referralCodeError').addClass('hidden');
-        } else {
-            $('#referralCodeError').removeClass('hidden');
-        }
-    });
 
 
 
 
-    // Handle form submission
+    //form submission errors
     $('#registrationForm').on('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault(); //not submit
 
         let isValid = true;
 
-        // Validate Marital Status (required)
-        const maritalStatus = $('#maritalStatus').val();
-        if (!maritalStatus) {
-            $('#maritalStatusError').removeClass('hidden');
-            isValid = false;
-        } else {
-            $('#maritalStatusError').addClass('hidden');
-        }
-
-        // Validate Employment Status (required)
-        const employmentStatus = $('#employmentStatus').val();
-        if (!employmentStatus) {
-            $('#employmentStatusError').removeClass('hidden');
-            isValid = false;
-        } else {
-            $('#employmentStatusError').addClass('hidden');
-        }
-
-        // Validate Full Name (only letters and spaces)
+        // fullname (only letters and spaces)
         const fullName = $('#fullName').val();
         if (!/^[a-zA-Z\s]+$/.test(fullName)) {
             $('#fullNameError').removeClass('hidden');
@@ -133,7 +106,7 @@ $(document).ready(function() {
             $('#fullNameError').addClass('hidden');
         }
 
-        // Validate Email Format
+        // email format
         const email = $('#email').val();
         if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
             $('#emailError').removeClass('hidden');
@@ -142,7 +115,7 @@ $(document).ready(function() {
             $('#emailError').addClass('hidden');
         }
 
-        // Validate Password
+        // passwrod
         const password = $('#password').val();
         if (password.length < 6) {
             $('#passwordError').removeClass('hidden');
@@ -151,7 +124,7 @@ $(document).ready(function() {
             $('#passwordError').addClass('hidden');
         }
 
-        // Validate Confirm Password
+        // confirm password
         const confirmPassword = $('#confirmPassword').val();
         if (confirmPassword !== password) {
             $('#confirmPasswordError').removeClass('hidden');
@@ -160,7 +133,7 @@ $(document).ready(function() {
             $('#confirmPasswordError').addClass('hidden');
         }
 
-        // Validate Phone Number
+        // phone number
         const phone = $('#phone').val();
         if (phone && !/^\d{10}$/.test(phone)) {
             $('#phoneError').removeClass('hidden');
@@ -169,7 +142,7 @@ $(document).ready(function() {
             $('#phoneError').addClass('hidden');
         }
 
-        // Validate Age
+        //age
         const age = $('#age').val();
         if (!age || age <= 0) {
             $('#ageError').removeClass('hidden');
@@ -178,7 +151,26 @@ $(document).ready(function() {
             $('#ageError').addClass('hidden');
         }
 
-        // Validate Years Since Divorce (if applicable)
+
+        // gender
+        const gender = $('input[name="gender"]:checked').val();
+        if (!gender) {
+            $('#genderError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#genderError').addClass('hidden');
+        }
+
+        //marital status dropdown
+        const maritalStatus = $('#maritalStatus').val();
+        if (!maritalStatus) {
+            $('#maritalStatusError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#maritalStatusError').addClass('hidden');
+        }
+
+        //divorce years (if applicable)
         const maritalStatusValue = $('#maritalStatus').val();
         if (maritalStatusValue === "Divorced") {
             const yearsSinceDivorce = $('#yearsSinceDivorce').val();
@@ -190,7 +182,7 @@ $(document).ready(function() {
             }
         }
 
-        //Validate Spouse name  (if applicable)
+        // Spouse name  (if applicable)
         if (maritalStatusValue === "Married") {
             const spouseName = $('#spouseName').val();
             if (!spouseName) {
@@ -202,8 +194,17 @@ $(document).ready(function() {
  
         }
 
+        // Employment Status (required)
+        const employmentStatus = $('#employmentStatus').val();
+        if (!employmentStatus) {
+            $('#employmentStatusError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#employmentStatusError').addClass('hidden');
+        }
+        
 
-        // Validate Company Name (if applicable)
+        //Company Name (if applicable)
         const employmentStatusValue = $('#employmentStatus').val();
         if (employmentStatusValue === "Employed" || employmentStatusValue === "Self-Employed") {
             const companyName = $('#companyName').val();
@@ -215,7 +216,7 @@ $(document).ready(function() {
             }
         }
 
-        //Validate institute Name  (if applicable)
+        //institute Name  (if applicable)
         if (employmentStatusValue === "Student") {
             const instituteName = $('#instituteName').val();
             if (!instituteName) {
@@ -227,7 +228,7 @@ $(document).ready(function() {
  
         }
 
-        // Validate Country (required)
+        //Country (required)
         const country = $('#country').val();
         if (!country) {
             $('#countryError').removeClass('hidden');
@@ -236,7 +237,7 @@ $(document).ready(function() {
             $('#countryError').addClass('hidden');
         }
 
-        // Validate State (if country is selected, state is also required)
+        // State (as country selected)
         const state = $('#state').val();
         if (country && !state) {
             $('#stateError').removeClass('hidden');
@@ -246,7 +247,7 @@ $(document).ready(function() {
         }
 
 
-        // Validate City (required)
+        // City (as country and state selected)
         const city = $('#city').val();
         if (country && state && !city) {
             $('#cityError').removeClass('hidden');
@@ -256,16 +257,7 @@ $(document).ready(function() {
         }
 
 
-        // Validate Gender
-        const gender = $('input[name="gender"]:checked').val();
-        if (!gender) {
-            $('#genderError').removeClass('hidden');
-            isValid = false;
-        } else {
-            $('#genderError').addClass('hidden');
-        }
-
-        // Validate Username
+        // Username
         const username = $('#username').val();
         if (!username) {
             $('#usernameValueError').removeClass('hidden');
@@ -274,7 +266,7 @@ $(document).ready(function() {
             $('#usernameValueError').addClass('hidden');
         }
 
-        // Validate Referral Code
+        //Referral Code
         const referralCode = $('#referralCode').val();
         if (referralCode && !validReferralCodes.includes(referralCode)) {
             $('#referralCodeError').removeClass('hidden');
@@ -283,7 +275,7 @@ $(document).ready(function() {
             $('#referralCodeError').addClass('hidden');
         }
 
-        // Validate Terms & Conditions
+        //Terms & Conditions
         const terms = $('#terms').is(':checked');
         if (!terms) {
             $('#termsError').removeClass('hidden');
@@ -292,11 +284,27 @@ $(document).ready(function() {
             $('#termsError').addClass('hidden');
         }
 
-        // If everything is valid, show success message and submit the form
+        // no error submit 
         if (isValid) {
-            $('#successMessage').removeClass('hidden');
-            // Normally, you would submit the form via AJAX or standard submission
-            // this.submit();  // Uncomment if using regular submission
+            var formData = $(this).serialize();
+    
+            $.ajax({
+                url: 'submit.php', 
+                type: 'POST',
+                data: formData,
+                dataType: "json",
+                success: function(response) {
+                    if (response.status === 'success') {
+                        $('#successMessage').removeClass('hidden');
+                    } else {
+                        $('#errorMessage').removeClass('hidden');
+                        $('#errorMessage').text(response.message);  
+                    }
+                },
+                error: function() {
+                    $('#errorMessage').removeClass('hidden');
+                }
+            });
         }
     });
 });

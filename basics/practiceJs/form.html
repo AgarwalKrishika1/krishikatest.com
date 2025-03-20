@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h2>Registration Form</h2>
-        <form id="registrationForm" novalidate>
+        <form id="registrationForm" action="" novalidate>
             <!-- Full Name -->
             <label for="fullName">Full Name (Required):</label>
             <input type="text" id="fullName" name="fullName" required>
@@ -46,7 +46,7 @@
             <input type="date" id="dob" name="dob">
             <br><br>
     
-            <!-- Age (Auto-calculated) -->
+            <!-- Age -->
             <label for="age">Age (Required):</label>
             <input type="text" id="age" name="age" readonly required>
             <span id="ageError" class="error hidden">Please enter a valid age.</span>
@@ -73,13 +73,15 @@
             <span id="maritalStatusError" class="error hidden">Marital status is required.</span>
             <br><br>
     
-            <!-- Dynamic Fields based on Marital Status -->
+            <!-- Spouse Name -->
             <div id="spouseNameField" class="hidden">
                 <label for="spouseName">Spouse Name:</label>
                 <input type="text" id="spouseName" name="spouseName">
                 <span id="spouseNameError" class="error hidden">Enter Your spouse name.</span>
                 <br><br>
             </div>
+
+            <!-- Years Since Divorce-->
             <div id="yearsSinceDivorceField" class="hidden">
                 <label for="yearsSinceDivorce">Years Since Divorce:</label>
                 <input type="number" id="yearsSinceDivorce" name="yearsSinceDivorce">
@@ -99,13 +101,15 @@
             <span id="employmentStatusError" class="error hidden">Employment status is required.</span>
             <br><br>
     
-            <!-- Dynamic Fields based on Employment Status -->
+            <!-- Company Name -->
             <div id="companyNameField" class="hidden">
                 <label for="companyName">Company Name:</label>
                 <input type="text" id="companyName" name="companyName">
                 <span id="companyNameError" class="error hidden">Enter Your company name.</span>
                 <br><br>
             </div>
+
+            <!-- Institute Name -->
             <div id="instituteNameField" class="hidden">
                 <label for="instituteName">Institute Name:</label>
                 <input type="text" id="instituteName" name="instituteName">
@@ -123,25 +127,26 @@
             </select>
             <span id="countryError" class="error hidden">Please select a country.</span>
             <br><br>
-    
+            
+            <!-- State -->
             <div id="stateField" class="hidden">
                 <label for="state">State:</label>
                 <select id="state" name="state">
                     <option value="">Select State</option>
-                    <!-- States will be populated dynamically -->
+                    
                 </select>
                 <span id="stateError" class="error hidden">Please select a state.</span>
                 <br><br>
             </div>
             
     
-            <!-- City Name (Hidden based on State Selection) -->
+            <!-- City -->
             <label for="city">City Name:</label>
             <input type="text" id="city" name="city">
             <span id="cityError" class="error hidden">Please enter a city.</span>
             <br><br>
     
-            <!-- Username Availability Check -->
+            <!-- Username -->
             <label for="username">Username:</label>
             <input type="text" id="username" name="username">
             <span id="usernameValueError" class="error hidden">Please enter a username.</span>

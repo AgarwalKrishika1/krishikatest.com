@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // Predefined lists for usernames and referral codes
-    const usernames = ["user1", "john_doe", "alice_smith"];
-    const referralCodes = ["WELCOME1", "DISCOUNT50"];
+    const usernames = ["user1", "user2", "user3"];
+    const validReferralCodes = ["WELCOME1", "DISCOUNT50"];
 
     // Handle Marital Status Change
     $('#maritalStatus').on('change', function() {
@@ -33,36 +33,36 @@ $(document).ready(function() {
         }
     });
 
-        // Object to store states based on country
+    // Object to store states based on country
     const countryStates = {
-    "India": ["Maharashtra", "Delhi", "Karnataka"],
-    "USA": ["California", "New York", "Texas", "Florida"],
-    "UK": ["England", "Scotland", "Wales", "Northern Ireland"]
+        "India": ["Maharashtra", "Delhi", "Karnataka"],
+        "USA": ["California", "New York", "Texas", "Florida"],
+        "UK": ["England", "Scotland", "Wales", "Northern Ireland"]
     };
 
     // Handle Country Change (For India, USA, UK - show State dropdown)
     $('#country').on('change', function() {
-    const country = $(this).val();
-    const stateDropdown = $('#state');
+        const country = $(this).val();
+        const stateDropdown = $('#state');
 
-    // Clear the previous state options
-    stateDropdown.empty();
+        // Clear the previous state options
+        stateDropdown.empty();
 
-    if (countryStates[country]) {
-        // Show the state field
-        $('#stateField').removeClass('hidden');
-        
-        // Add the default "Select State" option
-        stateDropdown.append('<option value="">Select State</option>');
+        if (countryStates[country]) {
+            // Show the state field
+            $('#stateField').removeClass('hidden');
+            
+            // Add the default "Select State" option
+            stateDropdown.append('<option value="">Select State</option>');
 
-        // Add states corresponding to the selected country
-        countryStates[country].forEach(function(state) {
-            stateDropdown.append('<option value="' + state + '">' + state + '</option>');
-        });
-    } else {
-        // Hide the state field if no states are needed (e.g., USA or UK)
-        $('#stateField').addClass('hidden');
-    }
+            // Add states corresponding to the selected country
+            countryStates[country].forEach(function(state) {
+                stateDropdown.append('<option value="' + state + '">' + state + '</option>');
+            });
+        } else {
+            // Hide the state field if no states are needed (e.g., USA or UK)
+            $('#stateField').addClass('hidden');
+        }
     });
 
     // Calculate Age based on DOB
@@ -102,6 +102,24 @@ $(document).ready(function() {
         event.preventDefault(); // Prevent form submission
 
         let isValid = true;
+
+        // Validate Marital Status (required)
+        const maritalStatus = $('#maritalStatus').val();
+        if (!maritalStatus) {
+            $('#maritalStatusError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#maritalStatusError').addClass('hidden');
+        }
+
+        // Validate Employment Status (required)
+        const employmentStatus = $('#employmentStatus').val();
+        if (!employmentStatus) {
+            $('#employmentStatusError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#employmentStatusError').addClass('hidden');
+        }
 
         // Validate Full Name (only letters and spaces)
         const fullName = $('#fullName').val();
@@ -157,18 +175,83 @@ $(document).ready(function() {
             $('#ageError').addClass('hidden');
         }
 
-
         // Validate Years Since Divorce (if applicable)
-        const maritalStatus = $('#maritalStatus').val();
-        if (maritalStatus === "Divorced") {
+        const maritalStatusValue = $('#maritalStatus').val();
+        if (maritalStatusValue === "Divorced") {
             const yearsSinceDivorce = $('#yearsSinceDivorce').val();
-            if (yearsSinceDivorce && yearsSinceDivorce > age) {
+            if (yearsSinceDivorce && yearsSinceDivorce > age || !yearsSinceDivorce) {
                 $('#yearsSinceDivorceError').removeClass('hidden');
                 isValid = false;
             } else {
                 $('#yearsSinceDivorceError').addClass('hidden');
             }
         }
+
+        //Validate Spouse name  (if applicable)
+        if (maritalStatusValue === "Married") {
+            const spouseName = $('#spouseName').val();
+            if (!spouseName) {
+                $('#spouseNameError').removeClass('hidden');
+                isValid = false;
+            } else {
+                $('#spouseNameError').addClass('hidden');
+            }
+ 
+        }
+
+
+        // Validate Company Name (if applicable)
+        const employmentStatusValue = $('#employmentStatus').val();
+        if (employmentStatusValue === "Employed" || employmentStatusValue === "Self-Employed") {
+            const companyName = $('#companyName').val();
+            if (!companyName) {
+                $('#companyNameError').removeClass('hidden');
+                isValid = false;
+            } else {
+                $('#companyNameError').addClass('hidden');
+            }
+        }
+
+        //Validate institute Name  (if applicable)
+        if (employmentStatusValue === "Student") {
+            const instituteName = $('#instituteName').val();
+            if (!instituteName) {
+                $('#instituteNameError').removeClass('hidden');
+                isValid = false;
+            } else {
+                $('#instituteNameError').addClass('hidden');
+            }
+ 
+        }
+
+        // Validate Country (required)
+        const country = $('#country').val();
+        if (!country) {
+            $('#countryError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#countryError').addClass('hidden');
+        }
+
+        // Validate State (if country is selected, state is also required)
+        const state = $('#state').val();
+        if (country && !state) {
+            $('#stateError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#stateError').addClass('hidden');
+        }
+
+
+        // Validate City (required)
+        const city = $('#city').val();
+        if (country && state && !city) {
+            $('#cityError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#cityError').addClass('hidden');
+        }
+
 
         // Validate Gender
         const gender = $('input[name="gender"]:checked').val();
@@ -177,6 +260,24 @@ $(document).ready(function() {
             isValid = false;
         } else {
             $('#genderError').addClass('hidden');
+        }
+
+        // Validate Username
+        const username = $('#username').val();
+        if (!username) {
+            $('#usernameValueError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#usernameValueError').addClass('hidden');
+        }
+
+        // Validate Referral Code
+        const referralCode = $('#referralCode').val();
+        if (referralCode && !validReferralCodes.includes(referralCode)) {
+            $('#referralCodeError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#referralCodeError').addClass('hidden');
         }
 
         // Validate Terms & Conditions

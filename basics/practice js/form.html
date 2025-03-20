@@ -63,19 +63,21 @@
     
             <!-- Marital Status -->
             <label for="maritalStatus">Marital Status:</label>
-            <select id="maritalStatus" name="maritalStatus">
+            <select id="maritalStatus" name="maritalStatus" required>
                 <option value="">Select Marital Status</option>
                 <option value="Single">Single</option>
                 <option value="Married">Married</option>
                 <option value="Divorced">Divorced</option>
                 <option value="Widowed">Widowed</option>
             </select>
+            <span id="maritalStatusError" class="error hidden">Marital status is required.</span>
             <br><br>
     
             <!-- Dynamic Fields based on Marital Status -->
             <div id="spouseNameField" class="hidden">
                 <label for="spouseName">Spouse Name:</label>
                 <input type="text" id="spouseName" name="spouseName">
+                <span id="spouseNameError" class="error hidden">Enter Your spouse name.</span>
                 <br><br>
             </div>
             <div id="yearsSinceDivorceField" class="hidden">
@@ -87,24 +89,27 @@
     
             <!-- Employment Status -->
             <label for="employmentStatus">Employment Status:</label>
-            <select id="employmentStatus" name="employmentStatus">
+            <select id="employmentStatus" name="employmentStatus" required>
                 <option value="">Select Employment Status</option>
                 <option value="Employed">Employed</option>
                 <option value="Self-Employed">Self-Employed</option>
                 <option value="Student">Student</option>
                 <option value="Unemployed">Unemployed</option>
             </select>
+            <span id="employmentStatusError" class="error hidden">Employment status is required.</span>
             <br><br>
     
             <!-- Dynamic Fields based on Employment Status -->
             <div id="companyNameField" class="hidden">
                 <label for="companyName">Company Name:</label>
                 <input type="text" id="companyName" name="companyName">
+                <span id="companyNameError" class="error hidden">Enter Your company name.</span>
                 <br><br>
             </div>
             <div id="instituteNameField" class="hidden">
                 <label for="instituteName">Institute Name:</label>
                 <input type="text" id="instituteName" name="instituteName">
+                <span id="instituteNameError" class="error hidden">Enter Your institute name.</span>
                 <br><br>
             </div>
     
@@ -116,6 +121,7 @@
                 <option value="USA">USA</option>
                 <option value="UK">UK</option>
             </select>
+            <span id="countryError" class="error hidden">Please select a country.</span>
             <br><br>
     
             <div id="stateField" class="hidden">
@@ -124,6 +130,7 @@
                     <option value="">Select State</option>
                     <!-- States will be populated dynamically -->
                 </select>
+                <span id="stateError" class="error hidden">Please select a state.</span>
                 <br><br>
             </div>
             
@@ -131,19 +138,22 @@
             <!-- City Name (Hidden based on State Selection) -->
             <label for="city">City Name:</label>
             <input type="text" id="city" name="city">
+            <span id="cityError" class="error hidden">Please enter a city.</span>
             <br><br>
     
             <!-- Username Availability Check -->
             <label for="username">Username:</label>
             <input type="text" id="username" name="username">
+            <span id="usernameValueError" class="error hidden">Please enter a username.</span>
             <span id="usernameError" class="error hidden">Username already taken.</span>
             <br><br>
     
-            <!-- Referral Code -->
+           <!-- Referral Code -->
             <label for="referralCode">Referral Code (Optional):</label>
             <input type="text" id="referralCode" name="referralCode">
             <span id="referralCodeError" class="error hidden">Invalid referral code.</span>
             <br><br>
+
     
             <!-- Terms and Conditions -->
             <label>
